@@ -6,6 +6,10 @@ export default function NavBar() {
         <div className='navbar'>
             <ul>
                 <Link className='link' to='/' exact >Home</Link>
+            
+                <Link className='link' to='/' exact >About Us</Link>
+                <Link className='link' to='/' exact >Contact</Link>
+                
                
             </ul>
         </div>

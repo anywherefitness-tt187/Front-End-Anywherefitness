@@ -24,8 +24,30 @@
 .home-link:hover {
   border-radius: 5px;
   color: rgb(117, 239, 255);
+  font-size: 3vh;
 }
 .title {
   font-size: 10vh;
   color: #f59494;
+}
+
+.navbar {
+  background-color: rgba(22, 22, 22, 0.8);
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.link {
+  color: #efefef;
+  display: inline-block;
+  padding: 3px 20px;
+  font-size: 6rem;
+  text-decoration: none;
+  transition: 0.3s ease all;
+}
+
+.link:hover {
+  color: #f59494;
+  transform: scale(1.1);
 }
