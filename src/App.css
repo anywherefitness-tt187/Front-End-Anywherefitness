@@ -1,5 +1,7 @@
 .home {
+  background-color: dimgrey;
   display: flex;
+  flex-direction: column;
   height: 100vh;
   align-items: center;
   justify-content: space-evenly;
@@ -7,6 +9,7 @@
 
 .home-link {
   font-size: 40px;
+  font-weight: bolder;
   background: #f59494;
   display: inline-block;
   padding: 40px 80px;
@@ -16,4 +19,9 @@
   transition: 0.3s ease all;
   text-transform: uppercase;
 
+}
+
+.title {
+  font-size: 10vh;
+  color: #f59494;
 }
