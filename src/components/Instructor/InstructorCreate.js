@@ -106,7 +106,7 @@ function InstructorCreate({setClassList}){
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             setClassList(res.data)
-            // history.push('/dashboard/classes')
+            history.push('/dashboard/classes')
             //clear server error
             setServerError(null);      
           })
