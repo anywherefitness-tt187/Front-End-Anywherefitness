@@ -3,7 +3,6 @@ import {useHistory} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import axios from "axios";
- 
 
 function InstructorCreate({setClassList}){
     const history=useHistory();
