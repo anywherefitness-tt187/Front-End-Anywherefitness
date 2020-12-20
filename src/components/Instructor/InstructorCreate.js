@@ -3,11 +3,13 @@ import {useHistory} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import axios from "axios";
+import { date } from 'yup/lib/locale';
 
 function InstructorCreate({setClassList}){
     const history=useHistory();
     
     const [classInfo, setClassInfo]=useState({
+        class_id:Date.now(),
         class_name:"",
         class_description:"",
         class_type:"",
@@ -16,6 +18,7 @@ function InstructorCreate({setClassList}){
         class_starttime:"",
         class_duration:"",
         class_maxsize:"",
+        
     })
 
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
