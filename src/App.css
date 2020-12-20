@@ -7,43 +7,7 @@
   justify-content: space-evenly;
 }
  
-.ins_dashboard{
-  display:flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 2rem, 2rem;
-  margin: 2rem 5rem;
-  border-radius: 4px;
 
-}
-
-.ins_card{
-  /* background-color: RGBA(40,51,74,.8) ; */
-  color: #101820FF;
-  padding: 2rem 2rem;
-  border-radius: 2px;
-  box-shadow: 2px 4px #DAA03DFF;
-}
-
-h3{
-  margin:0 auto;
-  padding: 2rem;
-}
-
-.ins_create{
-  display:flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 5rem 10rem;
-  border-radius: 2px;
-  background-color: rgb(214, 214, 216);
-  color:#101820FF;
-  box-shadow: 2px 4px #DAA03DFF;
-  padding: 2rem 2rem;
-}
- 
 .home-link {
   font-size: 40px;
   font-weight: bolder;
@@ -88,3 +52,66 @@ h3{
   color: #f59494;
   transform: scale(1.1);
 }
+
+/* ---- starts the css for instructor feature ---- */
+.ins_dashboard{
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem, 2rem;
+  margin: 2rem 5rem;
+  border-radius: 4px;
+
+}
+
+.ins_card{
+  /* background-color: RGBA(40,51,74,.8) ; */
+  color: #101820FF;
+  padding: 2rem 2rem;
+  border-radius: 2px;
+  box-shadow: 2px 4px #f59494;
+}
+
+h3{
+  margin:0 auto;
+  padding: 2rem;
+  color: #101820FF;
+  text-shadow: 0.8px rgb(117, 239, 255);
+}
+
+.ins_create{
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 10rem;
+  border-radius: 2px;
+  background-color: rgb(214, 214, 216);
+  color:#101820FF;
+  box-shadow: 2px 4px #f59494;
+  padding: 2rem 2rem;
+}
+ 
+.error {
+  font-size: 1.2rem;
+  color: red;
+}
+
+.ins_classcard{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  align-content: space-around;
+  border-radius: 4px;
+  box-shadow: 2px 4px rgb(117, 239, 255);
+  background-color: rgb(243, 250, 252);
+  padding:2rem 1rem;
+  font-size:1.1rem;
+}
+.ins_desc{
+ font-style: italic;
+ font-size: 1rem; 
+}
+/* ---- ends the css for instructor feature ---- */
