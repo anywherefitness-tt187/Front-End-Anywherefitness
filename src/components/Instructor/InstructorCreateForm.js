@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import axios from "axios";
-import { date } from 'yup/lib/locale';
+ 
 
 function InstructorCreate({setClassList}){
     const history=useHistory();
@@ -109,7 +109,7 @@ function InstructorCreate({setClassList}){
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             setClassList(res.data)
-            history.push('/dashboard/classes')
+            history.push('/instructor')
             //clear server error
             setServerError(null);      
           })
