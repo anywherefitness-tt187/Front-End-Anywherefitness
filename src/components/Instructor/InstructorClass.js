@@ -1,17 +1,39 @@
-import React,{useState} from 'react';
+import React from 'react';
+import {useHistory} from 'react-router-dom';
 import {Button,Card,CardTitle,CardText,CardSubtitle, CardBody} from 'reactstrap';
-import {Link} from 'react-router-dom';
-import { FontAwesome } from 'react-icons/fa';
+// import {Link} from 'react-router-dom';
+// import { FontAwesome } from 'react-icons/fa';
 import { FaMapMarker,FaRegCalendar,FaClock} from 'react-icons/fa';
-import { IconName,GiWeightLiftingUp,GiDuration } from "react-icons/gi";
+import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";
- 
+import axios from 'axios';
  
 function InstructorClass({classList}){
- 
+    const history=useHistory();
+    //replace once the end point it ready
+    const baseUrl = "#.herokuapp.com"; 
+
+const handleUpdate=(e)=>{
+ e.preventDefault();
+ history.push(`/instructor/updateform/${classList.class_id}`);
+}
+
+const handleDelete=()=>{
+    //replace axiosWithAuth after login is ready
+// axios.delete(`${baseURL}/api/instrucor/class/${classList.id}`)
+axios.delete(`#`)
+.then(res=>{
+    console.log('res in delete=',res)
+    //update state to remove the deleted class id
+    //reroute to class dashboard
+})
+.catch(err=>{
+    console.log('err in delete',err)
+})
+}
+
 return(
     <div className="ins_classes">
-       <h3>Here are your Classes!</h3>
         <Card className="ins_classcard">
         <CardTitle tag="h5">{classList.class_name} in Anywhere Fitness!</CardTitle>
         <CardText className="ins_desc">{classList.class_description}</CardText>
@@ -30,6 +52,8 @@ return(
                          
              </IconContext.Provider>
              <CardText>Max Class Size:{classList.class_maxsize}</CardText>
+             <Button color="info" onClick={handleUpdate}>Update</Button>
+             <Button color="danger" onClick={handleDelete}>Delete</Button>
              </CardBody>
         </Card>
     </div>

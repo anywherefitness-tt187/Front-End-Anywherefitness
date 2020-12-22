@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {Button,Card,CardTitle,CardText,CardSubtitle} from 'reactstrap';
 import {useHistory} from 'react-router-dom';
 import InstructorClass from './InstructorClass';
@@ -8,7 +8,7 @@ const history=useHistory();
 
 const handleClick=(e)=>{
  e.preventDefault();
- history.push('/instructor/instructorcreate');
+ history.push(`/instructor/createform`);
 }
 
 return(
@@ -18,6 +18,7 @@ return(
         <CardText>As an instructor of Anywhere Fitness, you can create new classes! Also, update and delete them.
         </CardText>
         <div className="ins_classlist">
+            <h3>Here are your Classes!</h3>
            {classList.length !==0 ? classList.map(item=>(
                 <InstructorClass classList={item} key={item.class_id} />
             )) : <CardSubtitle tag="h6"> No current classes, Please go ahead and click Create New Class below :</CardSubtitle>
