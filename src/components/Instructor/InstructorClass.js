@@ -1,8 +1,6 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import {Button,Card,CardTitle,CardText,CardSubtitle, CardBody} from 'reactstrap';
-// import {Link} from 'react-router-dom';
-// import { FontAwesome } from 'react-icons/fa';
 import { FaMapMarker,FaRegCalendar,FaClock} from 'react-icons/fa';
 import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";

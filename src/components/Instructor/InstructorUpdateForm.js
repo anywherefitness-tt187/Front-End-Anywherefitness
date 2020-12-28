@@ -114,7 +114,7 @@ function InstructorUpdateForm({classList,setClassList}){
           .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            setClassList([res.data])
+            // setClassList([res.data)
             history.push('/dashboard/classes')
             //clear server error
             setServerError(null);      
