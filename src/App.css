@@ -126,4 +126,15 @@ h4{
 button{
   margin:0.5rem 1rem;
 }
+.login-form{
+  width:100%;
+  max-width: 650px;
+  padding:3% 8%;
+  margin:auto;
+  font-size: 1.1rem;
+  height:100%;
+  background-color: snow; 
+  box-shadow: 4px 5px #f59494;
+  color:#12251f;
+}
 /* ---- ends the css for instructor feature ---- */
