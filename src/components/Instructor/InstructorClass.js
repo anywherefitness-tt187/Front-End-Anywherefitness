@@ -4,7 +4,7 @@ import {Button,Card,CardTitle,CardText,CardSubtitle, CardBody} from 'reactstrap'
 import { FaMapMarker,FaRegCalendar,FaClock} from 'react-icons/fa';
 import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import {axiosWithAuth} from '../../utils/axiosWithAuth';
  
 function InstructorClass({classList}){
     const history=useHistory();
