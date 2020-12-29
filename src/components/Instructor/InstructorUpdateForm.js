@@ -3,7 +3,7 @@ import {useHistory,useParams} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button} from 'reactstrap';
 import * as yup from "yup";
 import axios from "axios";
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
  
 
 function InstructorUpdateForm({classList,setClassList}){
@@ -127,6 +127,9 @@ function InstructorUpdateForm({classList,setClassList}){
           
   }
 
+  const handleBack=()=>{
+    history.push('/instructor/dashboard')
+  }
 return(
     <>
     <h4>Update your class : {classInfo.class_name}!</h4>
@@ -227,10 +230,14 @@ return(
             onChange={handleChange}
             />
             </FormGroup>
-            <Button color="warning"
+            <Button color="success"
             className="btn-lg  btn-block"
             type="submit"
             disabled={buttonIsDisabled}>Update Class</Button>
+
+            <Button color="warning"
+            className="btn-lg  btn-block"
+            >Go Back</Button>
         </Form>
     </div>
     </>
