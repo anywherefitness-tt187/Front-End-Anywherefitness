@@ -3,13 +3,14 @@ import {useHistory,useParams} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button} from 'reactstrap';
 import * as yup from "yup";
 import axios from "axios";
+import { axiosWithAuth } from '../utils/axiosWithAuth';
  
 
 function InstructorUpdateForm({classList,setClassList}){
 
     const history=useHistory();
     const params = useParams(); 
-    const baseUrl="#";
+ 
     // set classInfo by getting the class from id param and axios call
     // useEffect(()=>{
     //     axios.get(`${baseUrl}/api/instructor/classlist`)
@@ -110,7 +111,7 @@ function InstructorUpdateForm({classList,setClassList}){
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
-    axios //to be replaced with axiosWithAuth once login is ready
+    axiosWithAuth() 
           .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)

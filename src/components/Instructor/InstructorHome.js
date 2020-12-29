@@ -4,6 +4,7 @@ import InstructorDashboard from './InstructorDashboard';
 import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
 import InstructorLogin from '../InstructorLogin';
+import PrivateRoute from '../PrivateRoute';
 import NavBar from '../NavBar';
 
 export default function InstructorHome() {
@@ -42,9 +43,9 @@ export default function InstructorHome() {
         <InstructorLogin/>
         </Route>
 
-        <Route exact path="/instructor/dashboard">
+        <PrivateRoute exact path="/instructor/dashboard">
         <InstructorDashboard classList={classList} setClassList={setClassList}/>
-        </Route>
+        </PrivateRoute>
         
         <Route exact path="/instructor/createform">
             <InstructorCreateForm setClassList={setClassList}/>

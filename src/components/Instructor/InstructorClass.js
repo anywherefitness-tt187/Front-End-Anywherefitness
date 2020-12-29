@@ -4,12 +4,10 @@ import {Button,Card,CardTitle,CardText,CardSubtitle, CardBody} from 'reactstrap'
 import { FaMapMarker,FaRegCalendar,FaClock} from 'react-icons/fa';
 import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";
-import axios from 'axios';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
  
 function InstructorClass({classList}){
     const history=useHistory();
-    //replace once the end point it ready
-    const baseUrl = "#.herokuapp.com"; 
 
 const handleUpdate=(e)=>{
  e.preventDefault();
@@ -17,9 +15,9 @@ const handleUpdate=(e)=>{
 }
 
 const handleDelete=()=>{
-    //replace axiosWithAuth after login is ready
+   
 // axios.delete(`${baseURL}/api/instrucor/class/${classList.id}`)
-axios.delete(`#`)
+axiosWithAuth().delete(`#`)
 .then(res=>{
     console.log('res in delete=',res)
     //update state to remove the deleted class id
