@@ -7,6 +7,6 @@ return axios.create({
         headers:{
             authorization: token
         },
-        baseURL:"http://localhost:5000"//modify to herokko frm backend
+        baseURL:"https://anywherefitness187.herokuapp.com"//frm backend
     })
 }

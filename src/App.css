@@ -54,6 +54,20 @@
 }
 
 /* ---- starts the css for instructor feature ---- */
+.register-form{
+  width:100%;
+  max-width: 750px;
+  padding:4% 10%;
+  margin:auto;
+  margin-top: 10rem;
+  margin-bottom: 15rem;
+  font-size: 1.1rem;
+  height:100%;
+  background-color: RGBA(255,255,255,.8) ;
+  box-shadow: 4px 5px #f59494;
+  color:#12251f;
+}
+
 .ins_dashboard{
   display:flex;
   justify-content: flex-start;
@@ -131,6 +145,7 @@ button{
   max-width: 650px;
   padding:3% 8%;
   margin:auto;
+  margin-top: 10rem;
   font-size: 1.1rem;
   height:100%;
   background-color: snow; 
