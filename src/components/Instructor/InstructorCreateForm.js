@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
  
 
 function InstructorCreate({setClassList}){
@@ -114,8 +114,10 @@ function InstructorCreate({setClassList}){
           .catch((err)=>{
             console.log('server erro in post',err)
             setServerError("oops! Looks like server side error!");
-          }) 
-          
+          })        
+  }
+  const handleBack=()=>{
+    history.push('/instructor/dashboard')
   }
 
 return(
@@ -222,6 +224,10 @@ return(
             className="btn-lg  btn-block"
             type="submit"
             disabled={buttonIsDisabled}>Create Class</Button>
+
+            <Button color="warning"
+            className="btn-lg  btn-block"
+            onClick={handleBack}>Go Back</Button>
         </Form>
     </div>
     </>
