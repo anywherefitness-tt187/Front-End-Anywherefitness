@@ -11,7 +11,7 @@ function Register() {
     const [userInfo, setUserInfo]=useState({
         username:"",
         password:"",
-        role:"",
+        // role:"",
     })
 
     // server error
@@ -24,7 +24,7 @@ function Register() {
     const [errors, setErrors] = useState({
       username:"",
       password:"",
-      role:"",
+      // role:"",
     });
 
 
@@ -79,8 +79,8 @@ function Register() {
     .min(4,"Please enter password of atleast 4 characters")
     .required("Please enter Password"),
 
-    role: yup.string()
-    .required("Please enter role"),
+    // role: yup.string()
+    // .required("Please enter role"),
    });
 
     const handleSubmit=(e)=>{
@@ -98,11 +98,12 @@ function Register() {
               //update the stored post - with response from api
               console.log('Response back from reqres:',res.data)
               localStorage.setItem('token', res.data.token)
+              console.log('token=',res.data.token);
              //route to client or instructor dashboard
                 const signupRoute = res.data.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
                 history.push(signupRoute);
              //clear server error
-              setServerError(null);
+              // setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)
@@ -142,7 +143,7 @@ function Register() {
         />
         {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
         </FormGroup>
- 
+{/*  
         <FormGroup className="text-left">
         <Label htmlFor="role"> Role?
             <select 
@@ -157,8 +158,8 @@ function Register() {
             <option value="instructor">Instructor</option>    
             </select>
             {errors.role.length > 0 ? <p className="error">{errors.role}</p> : null}
-            </Label>
-        </FormGroup>
+            </Label> */}
+        {/* </FormGroup> */}
 
        <Button className="btn-lg btn-block"
        color="primary"

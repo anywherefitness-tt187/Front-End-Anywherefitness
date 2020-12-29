@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
-import axios from "axios";
+import { axiosWithAuth } from '../utils/axiosWithAuth';
  
 
 function InstructorCreate({setClassList}){
@@ -76,7 +76,7 @@ function InstructorCreate({setClassList}){
     });
   }, [classInfo]);
 
-  // Add a schema, used for all validation to determine whether the input is valid or not
+  // Schema, used for all validation to determine whether the input is valid or not
   const formSchema = yup.object().shape({
     class_name: yup.string()
     .min(2,"Please enter name of atleast 2 characters")
@@ -99,12 +99,10 @@ function InstructorCreate({setClassList}){
     class_maxsize:yup.string().required("Maxsize is required!"),
   });
 
-  const url = 'xxx.herokuapp.com';
-
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
-    axios //to be replaced with axiosWithAuth once login is ready
+    axiosWithAuth()  
           .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
