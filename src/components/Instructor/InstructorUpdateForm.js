@@ -115,7 +115,7 @@ function InstructorUpdateForm({classList,setClassList}){
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             // setClassList([res.data)
-            history.push('/dashboard/classes')
+            history.push('/instructor/dashboard')
             //clear server error
             setServerError(null);      
           })
