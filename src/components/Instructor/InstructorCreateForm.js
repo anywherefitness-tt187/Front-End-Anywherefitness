@@ -5,19 +5,18 @@ import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
  
 
-function InstructorCreate({setClassList}){
+function InstructorCreate({classList,setClassList}){
     const history=useHistory();
     
     const [classInfo, setClassInfo]=useState({
         class_id:Date.now(),
         class_name:"",
-        class_description:"",
         class_type:"",
         class_intensity:"",
         class_location:"",
-        class_starttime:"",
+        start_time:"",
         class_duration:"",
-        class_maxsize:"",
+        class_max_size:30,
         
     })
 
@@ -30,13 +29,12 @@ function InstructorCreate({setClassList}){
     // managing state for errors. empty unless inline validation (validateInput) updates key/value pair to have error
       const [errors, setErrors] = useState({
         class_name:"",
-        class_description:"",
         class_type:"",
         class_intensity:"",
         class_location:"",
         class_starttime:"",
         class_duration:"",
-        class_maxsize:"",
+        class_max_size:"",
       });
 
       const handleChange=(e)=>{
@@ -81,8 +79,6 @@ function InstructorCreate({setClassList}){
     class_name: yup.string()
     .min(2,"Please enter name of atleast 2 characters")
     .required("ClassName is required!"),
-    
-    class_description:yup.string(),
 
     class_type:yup.string().required("Choose Type is required!"),
 
@@ -96,18 +92,19 @@ function InstructorCreate({setClassList}){
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_maxsize:yup.string().required("Maxsize is required!"),
+    class_max_size:yup.number().required("Maxsize is required!"),
   });
 
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth()  
-          .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)
+          // .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)//replace 2 with id once received from login
+          .post('/api/users/2/class',classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            setClassList(res.data)
-            history.push('/instructor')
+            setClassList([...classList,res.data])
+            history.push('/instructor/dashboard')
             //clear server error
             setServerError(null);      
           })
@@ -135,17 +132,6 @@ return(
             onChange={handleChange}
             placeholder="Burn With us!"/>
              {errors.class_name.length > 0 ? <p className="error">{errors.class_name}</p> : null}
-            </FormGroup>
-
-            <FormGroup>
-            <Label htmlFor="class_description">Class Description</Label>
-            <Input name="class_description"
-            id="class_description"
-            type="textarea"
-            row="4"
-            value={classInfo.class_description}
-            onChange={handleChange}
-            placeholder="Pre-requisites, things to bring..."/>
             </FormGroup>
 
             <FormGroup>
@@ -203,19 +189,18 @@ return(
             <Label htmlFor="class_duration">Class Duration</Label>
             <Input name="class_duration"
             id="class_duration"
-            type="number"
             value={classInfo.class_duration}
             onChange={handleChange}
             placeholder="30minutes"/>
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_maxsize">Class Max Size</Label>
-            <Input name="class_maxsize"
-            id="class_maxsize"
+            <Label htmlFor="class_max_size">Class Max Size</Label>
+            <Input name="class_max_size"
+            id="class_max_size"
             type="number"
             min="3"
-            max="50"
+            max="30"
             value={classInfo.class_maxsize}
             onChange={handleChange}
             />
