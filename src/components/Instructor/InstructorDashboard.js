@@ -3,7 +3,7 @@ import {Button,Card,CardTitle,CardText,CardSubtitle} from 'reactstrap';
 import {useHistory} from 'react-router-dom';
 import InstructorClass from './InstructorClass';
 
-function InstructorDashboard({classList,setClassList}){
+function InstructorDashboard({loginInfo,classList,setClassList}){
 const history=useHistory();
 
 const handleClick=(e)=>{
@@ -14,7 +14,7 @@ const handleClick=(e)=>{
 return(
     <div className="ins_dashboard">
         <Card className="ins_card">
-        <CardTitle tag="h5">Welcome to Anywhere Fitness!</CardTitle>
+        <CardTitle tag="h5">{loginInfo}!</CardTitle>
         <CardText>As an instructor of Anywhere Fitness, you can create new classes! Also, update and delete them.
         </CardText>
         <Button color="primary" onClick={handleClick}> <h5>Create your New Class!</h5></Button>

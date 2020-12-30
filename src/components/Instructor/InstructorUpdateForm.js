@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import {useHistory,useParams} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button} from 'reactstrap';
 import * as yup from "yup";
-import axios from "axios";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
  
 
@@ -10,22 +9,8 @@ function InstructorUpdateForm({classList,setClassList}){
 
     const history=useHistory();
     const params = useParams(); 
- 
-    // set classInfo by getting the class from id param and axios call
-    // useEffect(()=>{
-    //     axios.get(`${baseUrl}/api/instructor/classlist`)
-    //     .then(res=>{
-    //         console.log('res in .get update=',res)
-    //         const updateClass=res.data.find(item=>item.id === Number(params.id));
-    //         setClassInfo(updateClass)
-    //     })
-    //     .catch(err=>{
-    //         console.log('err in .get update',err)
-    //     })
-
-    // },[])
-
-    const updateClass=classList.find(item=>item.class_id === Number(params.id))
+    
+    const updateClass=classList.find(item=>item.id === Number(params.id))
     const [classInfo, setClassInfo]=useState(updateClass);
     console.log('update classlist',classInfo);
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
@@ -37,13 +22,12 @@ function InstructorUpdateForm({classList,setClassList}){
     // managing state for errors. empty unless inline validation (validateInput) updates key/value pair to have error
       const [errors, setErrors] = useState({
         class_name:"",
-        class_description:"",
         class_type:"",
         class_intensity:"",
         class_location:"",
-        class_starttime:"",
+        start_time:"",
         class_duration:"",
-        class_maxsize:"",
+        class_max_size:"",
       });
 
       const handleChange=(e)=>{
@@ -88,9 +72,7 @@ function InstructorUpdateForm({classList,setClassList}){
     class_name: yup.string()
     .min(2,"Please enter name of atleast 2 characters")
     .required("ClassName is required!"),
-    
-    class_description:yup.string(),
-
+   
     class_type:yup.string().required("Choose Type is required!"),
 
     class_intensity: yup.string()
@@ -99,23 +81,21 @@ function InstructorUpdateForm({classList,setClassList}){
 
     class_location: yup.string().required("Location is required!"),
 
-    class_starttime: yup.string().required("date & time is required!"),
+    start_time: yup.string().required("date & time is required!"),
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_maxsize:yup.string().required("Maxsize is required!"),
+    class_max_size:yup.string().required("Maxsize is required!"),
   });
-
-  const url = 'xxx.herokuapp.com';
 
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth() 
-          .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)
+          .put(`/api/class/${classList.id}`, classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            // setClassList([res.data)
+            // setClassList([...classList,res.data])
             history.push('/instructor/dashboard')
             //clear server error
             setServerError(null);      
@@ -145,17 +125,6 @@ return(
             onChange={handleChange}
             placeholder="Burn With us!"/>
              {errors.class_name.length > 0 ? <p className="error">{errors.class_name}</p> : null}
-            </FormGroup>
-
-            <FormGroup>
-            <Label htmlFor="class_description">Class Description</Label>
-            <Input name="class_description"
-            id="class_description"
-            type="textarea"
-            row="4"
-            value={classInfo.class_description}
-            onChange={handleChange}
-            placeholder="Pre-requisites, things to bring..."/>
             </FormGroup>
 
             <FormGroup>
@@ -200,11 +169,11 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_starttime">Class Start Time</Label>
-            <Input name="class_starttime"
-            id="class_starttime"
+            <Label htmlFor="start_time">Class Start Time</Label>
+            <Input name="start_time"
+            id="start_time"
             type="datetime-local"
-            value={classInfo.class_startime}
+            value={classInfo.start_time}
             onChange={handleChange}
             placeholder="00:00"/>
             </FormGroup>
@@ -213,16 +182,15 @@ return(
             <Label htmlFor="class_duration">Class Duration</Label>
             <Input name="class_duration"
             id="class_duration"
-            type="number"
             value={classInfo.class_duration}
             onChange={handleChange}
             placeholder="30minutes"/>
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_maxsize">Class Max Size</Label>
-            <Input name="class_maxsize"
-            id="class_maxsize"
+            <Label htmlFor="class_max_size">Class Max Size</Label>
+            <Input name="class_max_size"
+            id="class_max_size"
             type="number"
             min="3"
             max="50"
@@ -237,6 +205,7 @@ return(
 
             <Button color="warning"
             className="btn-lg  btn-block"
+            onClick={handleBack}
             >Go Back</Button>
         </Form>
     </div>

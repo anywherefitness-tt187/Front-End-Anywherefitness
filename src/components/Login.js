@@ -1,13 +1,12 @@
 import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
-// import NavBar from './NavBar';
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
 import NavBar from './NavBar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
-export default function Login() {
-    // const [loginInfo,setLoginInfo]=useState();
+export default function Login({setLoginInfo}) {
+    
     const history=useHistory();
     
     const [loginData,setLoginData]=useState({
@@ -27,10 +26,10 @@ export default function Login() {
         console.log('on submit=',loginData);
       e.preventDefault();
       axiosWithAuth() //to be replaced with axiosWithAuth once login is ready
-          .post(`/api/auth/login`, loginData)
+          .post(`/api/auth/login`,loginData)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            // setLoginData(res.data)
+            setLoginInfo(res.data.message)
             window.localStorage.setItem('token', res.data)
             //Get a user by id api call to know if this login id is
             //instructor or client and accordingly route push
