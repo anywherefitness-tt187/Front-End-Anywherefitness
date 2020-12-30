@@ -31,7 +31,9 @@ export default function Login() {
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             // setLoginData(res.data)
-            // window.localStorage.setItem('token', res.data)
+            window.localStorage.setItem('token', res.data)
+            //Get a user by id api call to know if this login id is
+            //instructor or client and accordingly route push
             history.push('/instructor/dashboard')
             //clear server error
             // setError(null);      
