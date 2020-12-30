@@ -4,6 +4,7 @@ import {Button,Form,FormGroup,Label,Input} from 'reactstrap';
 import axios from "axios";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
+import NavBar from './NavBar';
 
 function Register() {
     const history=useHistory();
@@ -11,7 +12,7 @@ function Register() {
     const [userInfo, setUserInfo]=useState({
         username:"",
         password:"",
-        // role:"",
+        role:"",
     })
 
     // server error
@@ -24,7 +25,7 @@ function Register() {
     const [errors, setErrors] = useState({
       username:"",
       password:"",
-      // role:"",
+      role:"",
     });
 
 
@@ -79,8 +80,8 @@ function Register() {
     .min(4,"Please enter password of atleast 4 characters")
     .required("Please enter Password"),
 
-    // role: yup.string()
-    // .required("Please enter role"),
+    role: yup.string()
+    .required("Please enter role"),
    });
 
     const handleSubmit=(e)=>{
@@ -113,6 +114,8 @@ function Register() {
   
 
   return (
+    <>
+    <NavBar/>
     <Form className="register-form"
          onSubmit={handleSubmit}
          name="register">
@@ -143,7 +146,7 @@ function Register() {
         />
         {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
         </FormGroup>
-{/*  
+ 
         <FormGroup className="text-left">
         <Label htmlFor="role"> Role?
             <select 
@@ -158,8 +161,8 @@ function Register() {
             <option value="instructor">Instructor</option>    
             </select>
             {errors.role.length > 0 ? <p className="error">{errors.role}</p> : null}
-            </Label> */}
-        {/* </FormGroup> */}
+        </Label>
+        </FormGroup>
 
        <Button className="btn-lg btn-block"
        color="primary"
@@ -167,6 +170,7 @@ function Register() {
        disabled={buttonIsDisabled}
        >Register</Button>
     </Form>
+    </>
   );
 }
 
