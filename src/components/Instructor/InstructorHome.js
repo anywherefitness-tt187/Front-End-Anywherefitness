@@ -4,33 +4,10 @@ import InstructorDashboard from './InstructorDashboard';
 import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
 import PrivateRoute from '../PrivateRoute';
-import NavBar from '../NavBar';
+import initialClass from './TestData';
 
 export default function InstructorHome({loginInfo}) {
   
-    const initialClass=[{
-        class_name:"Burn More",
-        class_type:"Strength Traning",
-        class_intensity:"Advanced",
-        class_location:"22nd North St,Portland,OR 97235",
-        start_time:"2020-12-28T22:17",
-        class_duration:"45",
-        class_max_size:30,
-        id:1,
-        user_id: 2
-        },
-        {class_name:"Core Yoga",
-        class_type:"Yoga",
-        class_intensity:"Advanced",
-        class_location:"22nd North St,Portland,OR 97235",
-        start_time:"2020-12-28T22:17",
-        class_duration:"45",
-        class_max_size:30,
-        id:2,
-        user_id: 2
-        },
-]
-
  //make this classList to context  
  const [classList,setClassList]=useState(initialClass);
  console.log('classList=',classList);
@@ -51,7 +28,6 @@ export default function InstructorHome({loginInfo}) {
 
   return (
       <div className="ins_home">
-        <NavBar/>
         <Switch>
         {/* <Route exact path="/instructor"> 
         <InstructorLogin/>
@@ -59,7 +35,7 @@ export default function InstructorHome({loginInfo}) {
 
         <PrivateRoute exact path="/instructor/dashboard">
         <InstructorDashboard 
-            loginMsg={loginInfo}
+            loginInfo={loginInfo}
             classList={classList} 
             setClassList={setClassList}/>
         </PrivateRoute>

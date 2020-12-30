@@ -4,7 +4,6 @@ import {Button,Form,FormGroup,Label,Input} from 'reactstrap';
 import axios from "axios";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
-import NavBar from './NavBar';
 
 function Register() {
     const history=useHistory();
@@ -104,7 +103,7 @@ function Register() {
                 const signupRoute = res.data.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
                 history.push(signupRoute);
              //clear server error
-              // setServerError(null);
+               setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)
@@ -115,7 +114,6 @@ function Register() {
 
   return (
     <>
-    <NavBar/>
     <Form className="register-form"
          onSubmit={handleSubmit}
          name="register">
@@ -148,13 +146,13 @@ function Register() {
         </FormGroup>
  
         <FormGroup className="text-left">
-        <Label htmlFor="role"> Role?
+        <Label htmlFor="role" > Role
             <select 
             id="role"
             name="role"
             value={userInfo.role}
             onChange={handleChange}
-            className="mt-2"
+            className="mt-2 ml-2"
             >
             <option value="">***Please Choose One!***</option>
             <option value="client">Client</option>  

@@ -1,17 +1,16 @@
 import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
-import NavBar from './NavBar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 export default function Login({setLoginInfo}) {
     
     const history=useHistory();
-    
+    const [role,setRole]=useState('');
     const [loginData,setLoginData]=useState({
       username:"",
-      password:""
+      password:"",
     }); 
   
     const[error,setError] =useState("");
@@ -20,22 +19,28 @@ export default function Login({setLoginInfo}) {
       setLoginData({...loginData,
       [e.target.name]:e.target.value});
     }
+
+    const handleRole=(e)=>{
+      setRole({...role,
+      [e.target.name]:e.target.value});
+    }
   
   
     const handleSubmit=(e)=>{
         console.log('on submit=',loginData);
+        console.log('role on submit=',role);
       e.preventDefault();
-      axiosWithAuth() //to be replaced with axiosWithAuth once login is ready
+      axiosWithAuth()  
           .post(`/api/auth/login`,loginData)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
+            window.localStorage.setItem('token', res.data.token)
             setLoginInfo(res.data.message)
-            window.localStorage.setItem('token', res.data)
-            //Get a user by id api call to know if this login id is
-            //instructor or client and accordingly route push
-            history.push('/instructor/dashboard')
+            //route to client or instructor dashboard
+            const loginRoute = res.data.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
+            history.push(loginRoute);
             //clear server error
-            // setError(null);      
+            setError(null);      
           })
       .catch(err=>{
         console.log('error in loginData call',err);
@@ -50,7 +55,6 @@ export default function Login({setLoginInfo}) {
 
 return (
     <>
-    <NavBar/>
     <Form className="login-form"  
       onSubmit={handleSubmit}
       name="login"
@@ -76,6 +80,21 @@ return (
         onChange={handleChange}
         placeholder="Password"
         />
+        </FormGroup>
+        <FormGroup className="text-left">
+        <Label htmlFor="role"> Role
+            <select 
+            id="role"
+            name="role"
+            value={role}
+            onChange={handleRole}
+            className="mt-2 ml-2"
+            >
+            <option value="">***Client or Instructor?***</option>
+            <option value="client">Client</option>  
+            <option value="instructor">Instructor</option>    
+            </select>
+        </Label>
         </FormGroup>
       
        <Button className="btn-lg btn-dark btn-block"
