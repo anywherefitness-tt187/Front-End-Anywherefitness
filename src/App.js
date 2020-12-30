@@ -5,6 +5,7 @@ import User from './components/User';
 import './App.css';
 import InstructorHome from './components/Instructor/InstructorHome';
 import Register from './components/Register';
+import Login from './components/Login';
 
 export default function App() {
 
@@ -13,6 +14,7 @@ export default function App() {
     <div className= 'app'>
       <Route component={Home} path='/' exact/>
       <Route component={User} path='/user'/>
+      <Route path="/login" component={Login} />
       <Route path="/signup" component={Register} />
       <Route path="/instructor" component={InstructorHome} />
       </div>

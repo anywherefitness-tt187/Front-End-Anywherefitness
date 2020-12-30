@@ -3,7 +3,7 @@ import { Route, Switch} from 'react-router-dom';
 import InstructorDashboard from './InstructorDashboard';
 import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
-import InstructorLogin from '../InstructorLogin';
+import InstructorLogin from '../Login';
 import PrivateRoute from '../PrivateRoute';
 import NavBar from '../NavBar';
 

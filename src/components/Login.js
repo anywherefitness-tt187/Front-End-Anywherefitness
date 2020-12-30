@@ -2,10 +2,11 @@ import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
 // import NavBar from './NavBar';
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
-import axios from "axios";
+import NavBar from './NavBar';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
-export default function InstructorLogin() {
+export default function Login() {
     // const [loginInfo,setLoginInfo]=useState();
     const history=useHistory();
     
@@ -21,13 +22,12 @@ export default function InstructorLogin() {
       [e.target.name]:e.target.value});
     }
   
-    const url = '#herokoo.com';
   
     const handleSubmit=(e)=>{
         console.log('on submit=',loginData);
       e.preventDefault();
-      axios //to be replaced with axiosWithAuth once login is ready
-          .post(`https://jsonplaceholder.typicode.com/posts`, loginData)
+      axiosWithAuth() //to be replaced with axiosWithAuth once login is ready
+          .post(`/api/auth/login`, loginData)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             // setLoginData(res.data)
@@ -49,6 +49,7 @@ export default function InstructorLogin() {
 
 return (
     <>
+    <NavBar/>
     <Form className="login-form"  
       onSubmit={handleSubmit}
       name="login"
