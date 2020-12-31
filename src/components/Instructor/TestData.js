@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
             {
+            username:"Default Class A",        
             class_name:"Burn More",
             class_type:"Strength Traning",
             class_intensity:"Advanced",
@@ -11,7 +12,9 @@ export default [
             id:1,
             user_id: 2
             },
-            {class_name:"Core Yoga",
+            {
+            username:"Default Class B" ,        
+            class_name:"Core Yoga",
             class_type:"Yoga",
             class_intensity:"Advanced",
             class_location:"22nd North St,Portland,OR 97235",

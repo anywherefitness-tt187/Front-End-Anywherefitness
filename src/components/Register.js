@@ -5,7 +5,7 @@ import axios from "axios";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 
-function Register() {
+function Register({setLoginInfo}) {
     const history=useHistory();
 
     const [userInfo, setUserInfo]=useState({
@@ -98,12 +98,13 @@ function Register() {
               //update the stored post - with response from api
               console.log('Response back from reqres:',res.data)
               localStorage.setItem('token', res.data.token)
-              console.log('token=',res.data.token);
+              console.log('role=',res.data.cred.role);
+              // setLogin(res.data.cred.username)
              //route to client or instructor dashboard
-                const signupRoute = res.data.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
+                const signupRoute = res.data.cred.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
                 history.push(signupRoute);
              //clear server error
-               setServerError(null);
+              //  setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)

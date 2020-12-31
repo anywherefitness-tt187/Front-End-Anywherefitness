@@ -9,7 +9,19 @@ function InstructorUpdateForm({classList,setClassList}){
 
     const history=useHistory();
     const params = useParams(); 
-    
+        // set classInfo by getting the class of that instructor id
+    // useEffect(()=>{
+    //     axios.get(`${baseUrl}/api/instructor/classlist`)
+    //     .then(res=>{
+    //         console.log('res in .get update=',res)
+    //         const updateClass=res.data.find(item=>item.id === Number(params.id));
+    //         setClassInfo(updateClass)
+    //     })
+    //     .catch(err=>{
+    //         console.log('err in .get update',err)
+    //     })
+
+    // },[])
     const updateClass=classList.find(item=>item.id === Number(params.id))
     const [classInfo, setClassInfo]=useState(updateClass);
     console.log('update classlist',classInfo);
