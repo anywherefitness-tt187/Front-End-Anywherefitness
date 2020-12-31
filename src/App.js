@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { BrowserRouter, Route,Switch} from 'react-router-dom';
+import { Route,Switch} from 'react-router-dom';
 import Home from './components/Home';
 import User from './components/User';
 import './App.css';
@@ -10,25 +10,30 @@ import Login from './components/Login';
 
 export default function App() {
    const [loginInfo,setLoginInfo]=useState('');
- 
+   const [userId,setUserId]=useState('');
   return (
-    <BrowserRouter>
     <div className= 'app'>
       <NavBar/>
       <Switch>
-      <Route component={Home} path='/' exact/>
+      <Route exact path="/">
+        <Home/>
+      </Route> 
+
       <Route component={User} path='/user'/>
+
       <Route path="/login">
-        <Login setLoginInfo={setLoginInfo}/>
+        <Login setLoginInfo={setLoginInfo} setUserId={setUserId}/>
       </Route>  
+
       <Route path="/signup">
         <Register setLoginInfo={setLoginInfo}/>
       </Route>  
+
       <Route path="/instructor">
-         <InstructorHome loginInfo={loginInfo}/>
-      </Route> 
-      </Switch>
+         <InstructorHome loginInfo={loginInfo} userId={userId}/>
+      </Route>  
+
+      </Switch> 
       </div>
-      </BrowserRouter>
   )
 }

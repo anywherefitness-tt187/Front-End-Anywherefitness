@@ -97,14 +97,14 @@ function InstructorUpdateForm({classList,setClassList}){
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_max_size:yup.string().required("Maxsize is required!"),
+    class_max_size:yup.number().required("Maxsize is required!")
   });
 
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth() 
-          .put(`/api/class/${classList.id}`, classInfo)
+          .put(`/api/class/${classInfo.id}`, classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             // setClassList([...classList,res.data])
@@ -120,7 +120,7 @@ function InstructorUpdateForm({classList,setClassList}){
   }
 
   const handleBack=()=>{
-    history.push('/instructor/dashboard')
+    history.push(`/instructor/dashboard/${params.id}`)
   }
 return(
     <>
@@ -206,7 +206,7 @@ return(
             type="number"
             min="3"
             max="50"
-            value={classInfo.class_maxsize}
+            value={classInfo.class_max_size}
             onChange={handleChange}
             />
             </FormGroup>

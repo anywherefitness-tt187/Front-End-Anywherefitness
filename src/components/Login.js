@@ -4,7 +4,7 @@ import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
-export default function Login({setLoginInfo}) {
+export default function Login({setLoginInfo,setUserId}) {
     
     const history=useHistory();
     const [role,setRole]=useState('');
@@ -32,12 +32,13 @@ export default function Login({setLoginInfo}) {
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             window.localStorage.setItem('token', res.data.token)
-            // setLoginInfo(res.data.message)
+            setLoginInfo(res.data.message)
+            setUserId(res.data.id)
             //route to client or instructor dashboard
-            const loginRoute = res.data.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
+            const loginRoute = res.data.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
             history.push(loginRoute);
             //clear server error
-            // setError(null);      
+            setError(null);      
           })
       .catch(err=>{
         console.log('error in loginData call',err);

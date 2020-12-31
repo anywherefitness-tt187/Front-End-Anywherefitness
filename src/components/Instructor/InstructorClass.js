@@ -21,8 +21,7 @@ axiosWithAuth().delete(`/api/class/2`)
     console.log('res in delete=',res)
     //update state to remove the deleted class id
     console.log('classList in delete=',classList)
-    const newClassList=classList.filter(item=>item.class_duration=="40mins")
-    setClassList(newClassList);
+    // setClassList(newClassList);
 })
 .catch(err=>{
     console.log('err in delete',err)

@@ -1,14 +1,16 @@
 import React from 'react';
 import {Button,Card,CardTitle,CardText,CardSubtitle} from 'reactstrap';
-import {useHistory} from 'react-router-dom';
+import {useHistory,useParams} from 'react-router-dom';
 import InstructorClass from './InstructorClass';
  
 function InstructorDashboard({loginInfo,classList,setClassList}){
 const history=useHistory();
+const params=useParams();
+console.log('id in ins dashboard=',params.id,)
  
 const handleClick=(e)=>{
  e.preventDefault();
- history.push(`/instructor/createform`);
+ history.push(`/instructor/createform/${params.id}`);
 }
  
 return(
@@ -21,7 +23,7 @@ return(
         <div className="ins_classlist">
             <h3>Here are your Classes!</h3>
            {classList.length !==0 ? classList.map(item=>(
-                <InstructorClass classList={classList} item={item} setClassList={setClassList} key={item.class_name} />
+                <InstructorClass classList={classList} item={item} setClassList={setClassList} key={item.id} />
             )) : <CardSubtitle tag="h6"> No current classes, Please go ahead and click Create New Class below :</CardSubtitle>
            }
         </div>
