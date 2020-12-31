@@ -32,7 +32,7 @@ function InstructorCreate({classList,setClassList}){
         class_type:"",
         class_intensity:"",
         class_location:"",
-        class_starttime:"",
+        start_time:"",
         class_duration:"",
         class_max_size:"",
       });
@@ -88,7 +88,7 @@ function InstructorCreate({classList,setClassList}){
 
     class_location: yup.string().required("Location is required!"),
 
-    class_starttime: yup.string().required("date & time is required!"),
+    start_time: yup.string().required("date & time is required!"),
 
     class_duration:yup.string().required("Duration is required!"),
     
@@ -99,8 +99,8 @@ function InstructorCreate({classList,setClassList}){
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth()  
-          // .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)//replace 2 with id once received from login
-          .post('/api/users/2/class',classInfo)
+          // .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)//replace 7 with id once received from login
+          .post('/api/users/7/class',classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
             setClassList([...classList,res.data])
@@ -176,11 +176,11 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_starttime">Class Start Time</Label>
-            <Input name="class_starttime"
-            id="class_starttime"
+            <Label htmlFor="start_time">Class Start Time</Label>
+            <Input name="start_time"
+            id="start_time"
             type="datetime-local"
-            value={classInfo.class_startime}
+            value={classInfo.start_time}
             onChange={handleChange}
             placeholder="00:00"/>
             </FormGroup>
@@ -201,7 +201,7 @@ return(
             type="number"
             min="3"
             max="30"
-            value={classInfo.class_maxsize}
+            value={classInfo.class_max_size}
             onChange={handleChange}
             />
             </FormGroup>
