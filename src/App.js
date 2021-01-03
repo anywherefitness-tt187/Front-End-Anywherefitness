@@ -10,7 +10,7 @@ import Login from './components/Login';
 
 export default function App() {
    const [loginInfo,setLoginInfo]=useState('');
-   const [userId,setUserId]=useState('');
+   
   return (
     <div className= 'app'>
       <NavBar/>
@@ -22,7 +22,7 @@ export default function App() {
       <Route component={User} path='/user'/>
 
       <Route path="/login">
-        <Login setLoginInfo={setLoginInfo} setUserId={setUserId}/>
+        <Login setLoginInfo={setLoginInfo}/>
       </Route>  
 
       <Route path="/signup">
@@ -30,7 +30,7 @@ export default function App() {
       </Route>  
 
       <Route path="/instructor">
-         <InstructorHome loginInfo={loginInfo} userId={userId}/>
+         <InstructorHome loginInfo={loginInfo} />
       </Route>  
 
       </Switch> 

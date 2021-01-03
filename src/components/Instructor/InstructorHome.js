@@ -3,58 +3,37 @@ import { useParams, Route, Switch} from 'react-router-dom';
 import InstructorDashboard from './InstructorDashboard';
 import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import PrivateRoute from '../PrivateRoute';
 import initialClass from './TestData';
 
-export default function InstructorHome({loginInfo,userId}) {
+export default function InstructorHome({loginInfo}) {
   const params=useParams();
   console.log('params=',params)
  //make this classList to context  
  const [classList,setClassList]=useState(initialClass);
- console.log('classList=',classList);
 
-//get all the class for this instructor user#id
- useEffect(()=>{
-    axiosWithAuth()
-    //replace 2 with id once login endpoint is updated
-    .get(`/api/users/${userId}/class`)
-    .then(res=>{
-        console.log('res in get class:',res)
-        if (res.data.length !== 0){
-            const newList= res.data
-            setClassList([...classList,...newList])
-         }
-    })
-    .catch(err=>{
-        console.log('err in get class',err)
-    })
-    //has to be id
-    },[loginInfo])
+//  const [classDelete,setClassDelete]=useState(false);
+ console.log('classList=',classList);
 
   return (
       <div className="ins_home">
         <Switch>
-        {/* <Route exact path="/instructor"> 
-        <InstructorLogin/>
-        </Route> */}
-
-        <PrivateRoute exact path="/instructor/dashboard/:id">
+        <PrivateRoute exact path="/instructor/dashboard/:userid">
         <InstructorDashboard 
             loginInfo={loginInfo}
             classList={classList} 
-            setClassList={setClassList}/>
+            setClassList={setClassList}
+           />
         </PrivateRoute>
         
-        <Route exact path="/instructor/createform/:id">
+        <Route exact path="/instructor/createform/:userid">
             <InstructorCreateForm classList={classList} setClassList={setClassList}/>
         </Route>
         
-        <Route path="/instructor/updateform/:id">
+        <Route path="/instructor/:userid/updateform/:classid">
             <InstructorUpdateForm classList={classList} setClassList={setClassList}/>
         </Route>
-      </Switch>
-
+      </Switch> 
       </div>
   )
 }

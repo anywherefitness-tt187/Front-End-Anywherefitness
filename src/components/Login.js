@@ -1,10 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Spinner from 'react-bootstrap/Spinner'
 
-
-export default function Login({setLoginInfo,setUserId}) {
+export default function Login({setLoginInfo}) {
     
     const history=useHistory();
     const [role,setRole]=useState('');
@@ -12,8 +12,9 @@ export default function Login({setLoginInfo,setUserId}) {
       username:"",
       password:"",
     }); 
-  
+    const [loading,setLoading]=useState(false);
     const[error,setError] =useState("");
+ 
   
     const handleChange=(e)=>{
       setLoginData({...loginData,
@@ -27,13 +28,18 @@ export default function Login({setLoginInfo,setUserId}) {
   
     const handleSubmit=(e)=>{
       e.preventDefault();
+      setLoading(true);
+        postLogin();
+    }
+
+    const postLogin=()=>{
       axiosWithAuth()  
           .post(`/api/auth/login`,loginData)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
+            setLoading(false);
             window.localStorage.setItem('token', res.data.token)
             setLoginInfo(res.data.message)
-            setUserId(res.data.id)
             //route to client or instructor dashboard
             const loginRoute = res.data.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
             history.push(loginRoute);
@@ -42,6 +48,7 @@ export default function Login({setLoginInfo,setUserId}) {
           })
       .catch(err=>{
         console.log('error in loginData call',err);
+        setLoading(false);
         setError("Invalid Login name or Password");
         console.log('Login Failed for the User:',loginData.username);
       })
@@ -50,9 +57,14 @@ export default function Login({setLoginInfo,setUserId}) {
     const routeToRegister=(e)=>{
        history.push('/signup');
     }
-
+ 
 return (
     <>
+       {loading ? 
+       <div>
+        <h4>"Please wait..."</h4> <Spinner color="primary" /> 
+       </div>: 
+    <div>   
     <Form className="login-form"  
       onSubmit={handleSubmit}
       name="login"
@@ -109,7 +121,8 @@ return (
           <a href="/forgot-password">Forgot Password</a>
         </div>
     </Form>
-
+    </div>
+    }
     </>   
 )
 
