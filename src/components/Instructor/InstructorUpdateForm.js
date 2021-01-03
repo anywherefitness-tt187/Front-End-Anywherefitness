@@ -6,23 +6,32 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
  
 
 function InstructorUpdateForm({classList,setClassList}){
-
+    const [updated,setUpdated]=useState(false);
     const history=useHistory();
     const params = useParams(); 
-        // set classInfo by getting the class of that instructor id
-    // useEffect(()=>{
-    //     axios.get(`${baseUrl}/api/instructor/classlist`)
-    //     .then(res=>{
-    //         console.log('res in .get update=',res)
-    //         const updateClass=res.data.find(item=>item.id === Number(params.id));
-    //         setClassInfo(updateClass)
-    //     })
-    //     .catch(err=>{
-    //         console.log('err in .get update',err)
-    //     })
+    console.log('params.userid in updateform=',params.userid)
+    console.log('params.classid in updateform=',params.classid)
+    // set classInfo by getting the class of that instructor id
+ useEffect(()=>{
+  axiosWithAuth()
+  .get(`/api/users/${params.userid}/class`)
+  .then(res=>{
+      console.log('res in get class:',res)
+      if (res.data.length !== 0){
+          // const newList= res.data
+          // setClassList([...classList,...newList])
+          const updateClass=res.data.find(item=>item.id === Number(params.classid));
+          setClassInfo(updateClass)
+       }
+  })
+  .catch(err=>{
+      console.log('err in get class',err)
+  })
+  //has to be id
+  },[params.userid,updated])
 
-    // },[])
-    const updateClass=classList.find(item=>item.id === Number(params.id))
+ 
+    const updateClass=classList.find(item=>item.id === Number(params.classid))
     const [classInfo, setClassInfo]=useState(updateClass);
     console.log('update classlist',classInfo);
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
@@ -97,18 +106,19 @@ function InstructorUpdateForm({classList,setClassList}){
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_max_size:yup.string().required("Maxsize is required!"),
+    class_max_size:yup.number().required("Maxsize is required!")
   });
 
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth() 
-          .put(`/api/class/${classList.id}`, classInfo)
+          .put(`/api/class/${classInfo.id}`, classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
+            setUpdated(true);
             // setClassList([...classList,res.data])
-            history.push('/instructor/dashboard')
+            history.push(`/instructor/dashboard/${params.userid}`)
             //clear server error
             setServerError(null);      
           })
@@ -120,7 +130,7 @@ function InstructorUpdateForm({classList,setClassList}){
   }
 
   const handleBack=()=>{
-    history.push('/instructor/dashboard')
+    history.push(`/instructor/dashboard/${params.id}`)
   }
 return(
     <>
@@ -206,7 +216,7 @@ return(
             type="number"
             min="3"
             max="50"
-            value={classInfo.class_maxsize}
+            value={classInfo.class_max_size}
             onChange={handleChange}
             />
             </FormGroup>

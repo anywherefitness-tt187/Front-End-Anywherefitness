@@ -1,13 +1,14 @@
 import React,{useState,useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory,useParams} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
- 
+import Spinner from 'react-bootstrap/Spinner'
 
 function InstructorCreate({classList,setClassList}){
     const history=useHistory();
-    
+    const params=useParams();
+    const [pageLoading,setPageLoading]=useState(false);
     const [classInfo, setClassInfo]=useState({
         class_id:Date.now(),
         class_name:"",
@@ -17,7 +18,6 @@ function InstructorCreate({classList,setClassList}){
         start_time:"",
         class_duration:"",
         class_max_size:30,
-        
     })
 
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
@@ -99,14 +99,14 @@ function InstructorCreate({classList,setClassList}){
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth()  
-          // .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)//replace 7 with id once received from login
-          .post('/api/users/7/class',classInfo)
+          // .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)//replace 2 with id once received from login
+          .post(`/api/users/${params.userid}/class`,classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            setClassList([...classList,res.data])
-            history.push('/instructor/dashboard')
+            // setClassList([...classList,res.data])
+            history.push(`/instructor/dashboard/${params.userid}`)
             //clear server error
-            setServerError(null);      
+            // setServerError(null);      
           })
           .catch((err)=>{
             console.log('server erro in post',err)
@@ -114,11 +114,16 @@ function InstructorCreate({classList,setClassList}){
           })        
   }
   const handleBack=()=>{
-    history.push('/instructor/dashboard')
+    history.push(`/instructor/dashboard/${params.userid}`)
   }
 
 return(
     <>
+      {pageLoading ? 
+    <div>
+        <h4>"Please wait..."</h4> <Spinner color="primary" /> 
+    </div>: 
+    <div>
     <h3>Hello Instructor Name! <br/><Badge color="primary">Create new Class</Badge></h3>
     <div className="ins_create">
         <Form onSubmit={handleSubmit}
@@ -215,6 +220,8 @@ return(
             onClick={handleBack}>Go Back</Button>
         </Form>
     </div>
+    </div>
+    }   
     </>
 )
 }
