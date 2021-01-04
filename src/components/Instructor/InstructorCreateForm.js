@@ -139,9 +139,9 @@ return(
     aria-labelledby="contained-modal-title-vcenter"
     centered>
         <Modal.Header closeButton>
-        <Modal.Title>Hi {classInfo.username}!</Modal.Title>
+        <Modal.Title>Yay! You have successfully created your class <br/> {classInfo.class_name} :)</Modal.Title>
         </Modal.Header>
-        <Modal.Body> Yay! You have successfully created your class -{classInfo.class_name} :)</Modal.Body>
+        <Modal.Body> Thank you!</Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close
@@ -149,7 +149,7 @@ return(
         </Modal.Footer>
     </Modal> :   
     <div>
-    <h3>Hello Instructor Name! <br/><Badge color="primary">Create new Class</Badge></h3>
+    <h3><Badge color="primary">Create new Class here!</Badge></h3>
     <div className="ins_create">
         <Form onSubmit={handleSubmit}
          name="inscreate">
@@ -195,7 +195,7 @@ return(
             <option>Advanced</option>
             </Input> 
             </FormGroup>
-{/* q: backend, 4 fields for location? */}
+
             <FormGroup>
             <Label htmlFor="class_location">Class Location</Label>
             <Input name="class_location"

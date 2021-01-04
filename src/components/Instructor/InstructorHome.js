@@ -7,6 +7,7 @@ import PrivateRoute from '../PrivateRoute';
 import initialClass from './TestData';
 
 export default function InstructorHome() {
+   
  //make this classList to context  
  const [classList,setClassList]=useState(initialClass);
 
@@ -24,11 +25,11 @@ export default function InstructorHome() {
         </PrivateRoute>
         
         <Route exact path="/instructor/createform/:userid">
-            <InstructorCreateForm classList={classList} setClassList={setClassList}/>
+            <InstructorCreateForm classList={classList} setClassList={setClassList}  />
         </Route>
         
         <Route path="/instructor/:userid/updateform/:classid">
-            <InstructorUpdateForm classList={classList} setClassList={setClassList}/>
+            <InstructorUpdateForm classList={classList} setClassList={setClassList}  />
         </Route>
       </Switch> 
       </div>

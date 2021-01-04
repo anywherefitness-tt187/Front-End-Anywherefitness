@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import Modal from 'react-bootstrap/Modal';
 
-function InstructorUpdateForm(){
+function InstructorUpdateForm({userName}){
     const [updated,setUpdated]=useState(false);
     const history=useHistory();
     const params = useParams(); 
@@ -161,7 +161,7 @@ function InstructorUpdateForm(){
   }
 return(
     <>
-    <h4>Update your class : {classInfo.class_name}!</h4>
+    <h3>Update your class : {classInfo.class_name}!</h3>
     {show ?
     <Modal show={show} onHide={handleClose}  
     backdrop="static"
