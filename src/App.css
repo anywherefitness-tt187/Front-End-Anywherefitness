@@ -1,3 +1,10 @@
+.app{
+  background-image: url("https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  overflow-x: hidden;
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
 .home {
   background-color: rgb(100, 100, 100);
   display: flex;
@@ -28,7 +35,7 @@
   font-size: 3vh;
 }
 .title {
-  font-size: 10vh;
+  font-size: 7vh;
   color: #f59494;
 }
 
@@ -42,7 +49,7 @@
   color: #efefef;
   display: inline-block;
   padding: 3px 20px;
-  font-size: 3rem;
+  font-size: 1.8rem;
   text-decoration: none;
   transition: 0.3s ease all;
 }
@@ -52,14 +59,15 @@
   transform: scale(1.1);
 }
 
-/* ---- starts the css for instructor feature ---- */
+/* ---- starts the css for login and register ---- */
+
 .register-form{
   width:100%;
-  max-width: 750px;
+  max-width: 40rem;
   padding:4% 10%;
   margin:auto;
-  margin-top: 10rem;
-  margin-bottom: 15rem;
+  margin-top: 6rem;
+  margin-bottom: 10rem;
   font-size: 1.1rem;
   height:100%;
   background-color: RGBA(255,255,255,.8) ;
@@ -67,6 +75,21 @@
   color:#12251f;
 }
 
+.login-form{
+  width:100%;
+  max-width: 40rem;
+  padding:3% 8%;
+  margin:auto;
+  margin-top: 6rem;
+  margin-bottom: 10rem;
+  font-size: 1.1rem;
+  height:100%;
+  background-color: snow; 
+  box-shadow: 4px 5px #f59494;
+  color:#12251f;
+}
+/* ---- ends the css for login and register ---- */
+/* ---- starts the css for instructor feature ---- */
 .ins_dashboard{
   display:flex;
   justify-content: flex-start;
@@ -77,14 +100,21 @@
 
 }
 
+.ins_home{
+background-image: url("https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  overflow-x: hidden;
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
 .ins_card{
-  /* background-color: RGBA(40,51,74,.8) ; */
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   margin:0 auto;
-  width:150rem;
+  width:60rem;
+  background-color: RGBA(255,255,255,.8) ;
   color: #101820FF;
   padding: 2rem 2rem;
   border-radius: 2px;
@@ -93,8 +123,9 @@
 
 h3{
   margin:0 auto;
+  text-align: center;
   padding: 2rem;
-  color: #101820FF;
+  color: rgb(53, 62, 63);
   text-shadow: 0.8px rgb(117, 239, 255);
 }
 
@@ -111,10 +142,15 @@ h4{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5rem 10rem;
+  margin:0 auto;
   border-radius: 2px;
-  background-color: rgb(214, 214, 216);
-  color:#101820FF;
+  /* background-color: rgb(214, 214, 216); */
+  width:30rem;
+  background-color: RGBA(255,255,255,.7) ;
+  /* color:#101820FF; */
+  color:#f59494;
+  font-size: 1.2rem;
+  font-style: bold;
   box-shadow: 2px 4px #f59494;
   padding: 2rem 2rem;
 }
@@ -132,10 +168,13 @@ h4{
   align-content: space-around;
   border-radius: 4px;
   box-shadow: 2px 4px rgb(117, 239, 255);
-  background-color: rgb(243, 250, 252);
+  background-color: RGBA(255,255,255,.8) ;
+  /* background-color: rgb(243, 250, 252); */
   padding:1.5rem 1rem;
   font-size:1.1rem;
   margin: 1.5rem 1rem;
+  width:100%;
+  width:30rem;
 }
 .ins_desc{
  font-style: italic;
@@ -145,16 +184,5 @@ h4{
 button{
   margin:0.5rem 1rem;
 }
-.login-form{
-  width:100%;
-  max-width: 650px;
-  padding:3% 8%;
-  margin:auto;
-  margin-top: 10rem;
-  font-size: 1.1rem;
-  height:100%;
-  background-color: snow; 
-  box-shadow: 4px 5px #f59494;
-  color:#12251f;
-}
+
 /* ---- ends the css for instructor feature ---- */

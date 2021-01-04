@@ -8,7 +8,7 @@ import {axiosWithAuth} from '../../utils/axiosWithAuth';
 import Modal from 'react-bootstrap/Modal';
  
  
-function InstructorClass({classList,setClassList,item,}){
+function InstructorClass({classList,setClassList,item,userName}){
     const history=useHistory();
     const params=useParams();
     //setup Modal

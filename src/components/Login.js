@@ -62,7 +62,7 @@ return (
     <>
        {loading ? 
        <div>
-        <h4>"Please wait..."</h4> <Spinner color="primary" /> 
+        <h4>Loading...Please wait</h4> <Spinner color="primary" /> 
        </div>: 
     <div>   
     <Form className="login-form"  
