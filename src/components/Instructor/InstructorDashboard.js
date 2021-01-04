@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import {Button,Card,CardTitle,CardText,CardSubtitle} from 'reactstrap';
+import {Button,Card,CardTitle,CardText,CardSubtitle, CardImg} from 'reactstrap';
 import {useHistory,useParams} from 'react-router-dom';
 import InstructorClass from './InstructorClass';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
+import imagea from '../images/undraw_fitness_stats_sht6.svg';
+import imageb from '../images/undraw_working_out_6psf.svg';
 
 function InstructorDashboard({classList,setClassList}){
     const [pageLoading,setPageLoading]=useState(false);
@@ -24,7 +26,7 @@ function InstructorDashboard({classList,setClassList}){
       .catch(err=>{
           console.log('err in get class',err)
       })
-      },[])
+      },[params.userid])
     
 
 //get all the class for this instructor user#id
@@ -59,11 +61,19 @@ return(
             <div>
                 <h4>Loading...Please wait!"</h4> <Spinner color="primary" /> 
             </div>: 
+        <>    
         <Card className="ins_card">
+        <Card className="ins_intro">
         <CardTitle tag="h3">Hi {userName}, Welcome to Anywhere Fitness!</CardTitle>
-        <CardText><h4>As an instructor of Anywhere Fitness, you can create new classes! <br/> Also, update and delete them.</h4>
+        <CardImg top width="100%" 
+        className="dashimage"
+        src= {imagea}> 
+        </CardImg>
+        <CardText tag="h4">As an instructor of Anywhere Fitness, You can create new classes! update and delete them
+        also, view the registered clients for your class. Enjoy hosting fitness classes around the World!
         </CardText>
         <Button color="primary" onClick={handleClick}> <h5>Create your New Class!</h5></Button>
+        </Card>
         <div className="ins_classlist">
             <h3>Here are your Classes!</h3>
            {classList.length !==0 ? classList.map(item=>(
@@ -71,7 +81,12 @@ return(
             )) : <CardSubtitle tag="h6"> No current classes, Please go ahead and click Create New Class below :</CardSubtitle>
            }
         </div>
+        <CardImg top width="100%" 
+        className="dashimage"
+        src= {imageb}> 
+        </CardImg>
         </Card>
+        </>
         }
     </div>
 )
