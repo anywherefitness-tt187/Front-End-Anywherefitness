@@ -3,6 +3,7 @@ import { Route, Switch} from 'react-router-dom';
 import InstructorDashboard from './InstructorDashboard';
 import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
+import EnrolledUsers from './EnrolledUsers';
 import PrivateRoute from '../PrivateRoute';
 import initialClass from './TestData';
 
@@ -30,6 +31,10 @@ export default function InstructorHome() {
         
         <Route path="/instructor/:userid/updateform/:classid">
             <InstructorUpdateForm classList={classList} setClassList={setClassList}  />
+        </Route>
+
+        <Route path="/instructor/:userid/enrolled/:classid">
+            <EnrolledUsers />
         </Route>
       </Switch> 
       </div>
