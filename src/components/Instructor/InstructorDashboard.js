@@ -3,7 +3,7 @@ import {Button,Card,CardTitle,CardText,CardSubtitle, CardImg} from 'reactstrap';
 import {useHistory,useParams} from 'react-router-dom';
 import InstructorClass from './InstructorClass';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import Spinner from 'react-bootstrap/Spinner';
+import { Spinner } from 'reactstrap';
 import imagea from '../images/undraw_fitness_stats_sht6.svg';
 import imageb from '../images/undraw_working_out_6psf.svg';
 
@@ -58,8 +58,8 @@ const handleClick=(e)=>{
 return(
     <div className="ins_dashboard">
         {pageLoading ? 
-            <div>
-                <h4>Loading...Please wait!"</h4> <Spinner color="primary" /> 
+            <div className="ins_card">
+                <h4>Loading...Please wait!" <Spinner color="primary" /> </h4>
             </div>: 
         <>    
         <Card className="ins_card">
