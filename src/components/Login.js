@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import Spinner from 'react-bootstrap/Spinner'
+import { Spinner } from 'reactstrap';
 
 export default function Login({setLoginInfo}) {
     
@@ -61,8 +61,8 @@ export default function Login({setLoginInfo}) {
 return (
     <>
        {loading ? 
-       <div>
-        <h4>Loading...Please wait</h4> <Spinner color="primary" /> 
+       <div className="login-form" >
+        <h4>Loading...Please wait <Spinner color="primary" /> </h4>
        </div>: 
     <div>   
     <Form className="login-form"  

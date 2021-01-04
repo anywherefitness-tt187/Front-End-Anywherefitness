@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import {useHistory,useParams} from 'react-router-dom';
 import {Button,Card,CardTitle,CardText,CardSubtitle, CardBody} from 'reactstrap';
-import { FaMapMarker,FaRegCalendar,FaClock} from 'react-icons/fa';
+import { FaMapMarker,FaRegCalendar,FaClock,FaUserFriends} from 'react-icons/fa';
+import {MdFitnessCenter} from  "react-icons/md";
 import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";
 import {axiosWithAuth} from '../../utils/axiosWithAuth';
@@ -45,6 +46,10 @@ axiosWithAuth().delete(`/api/class/${item.id}`)
 })
 }
 
+const handleEnrolled=(e)=>{
+ e.preventDefault();
+ history.push(`/instructor/${params.userid}/enrolled/${item.id}`);
+}
 return(
     <>
     {show ?
@@ -67,21 +72,23 @@ return(
     <div className="ins_classes">
         <Card className="ins_classcard">
         <CardTitle tag="h5">{item.class_name} in Anywhere Fitness!</CardTitle>
-        <CardSubtitle>{item.class_type}</CardSubtitle>
+        <CardSubtitle><MdFitnessCenter/>Type:{item.class_type}</CardSubtitle>
         <CardBody>
-        <IconContext.Provider value={{style:{ color: "rgb(117, 239, 255)"}}}>
-           <CardSubtitle>  <GiWeightLiftingUp/> Intensity: {item.class_intensity}</CardSubtitle>
+        <IconContext.Provider value={{style:{ color: "rgb(117, 239, 255)",fontSize: '25px'}}}>
+           <CardText>  <GiWeightLiftingUp/><b><i>Intensity:</i></b> {item.class_intensity}</CardText>
          
-             <CardText><FaMapMarker/>{item.class_location}</CardText>
+             <CardText><FaMapMarker className="mr-2"/>{item.class_location}</CardText>
             
-             <CardText> <FaRegCalendar/>{item.start_time.slice(0,10)}</CardText>
+             <CardText className="mr-2"> <FaRegCalendar className="mr-2"/>{item.start_time.slice(0,10)} 
 
-             <CardText> <FaClock/> {item.start_time.slice(11)}</CardText>
+              <FaClock className="mr-2 ml-2"/> {item.start_time.slice(11)}</CardText>
 
-             <CardText><GiDuration/> Duration :{item.class_duration}</CardText>
+             <CardText><GiDuration className="mr-2"/><i> Duration:</i>{item.class_duration}</CardText>
                          
+             <CardText><FaUserFriends className="mr-2"/><i> Max Class Size:{item.class_max_size}</i></CardText>
              </IconContext.Provider>
-             <CardText>Max Class Size:{item.class_max_size}</CardText>
+             <CardSubtitle>Click to view Clients Enrolled for this class <Button className="enrolled" onClick={handleEnrolled}>Clients Enrolled</Button></CardSubtitle>
+             
              <Button color="info" onClick={handleUpdate}>Update</Button>
              <Button color="danger" onClick={handleDelete}>Delete</Button>
              </CardBody>

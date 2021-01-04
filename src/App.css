@@ -138,6 +138,11 @@ h4{
   font-style: oblique;
 }
 
+.enrolled{
+   background-color: #f59494;
+   border-color:white;
+   font-size: 1.2rem;
+}
 .ins_create{
   display:flex;
   flex-wrap: wrap;
