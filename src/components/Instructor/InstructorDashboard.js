@@ -24,7 +24,7 @@ function InstructorDashboard({classList,setClassList}){
       .catch(err=>{
           console.log('err in get class',err)
       })
-      },[])
+      },[params.userid])
     
 
 //get all the class for this instructor user#id
