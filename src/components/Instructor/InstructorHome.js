@@ -1,14 +1,12 @@
-import React,{useState,useEffect} from 'react';
-import { useParams, Route, Switch} from 'react-router-dom';
+import React,{useState} from 'react';
+import { Route, Switch} from 'react-router-dom';
 import InstructorDashboard from './InstructorDashboard';
 import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
 import PrivateRoute from '../PrivateRoute';
 import initialClass from './TestData';
 
-export default function InstructorHome({loginInfo}) {
-  const params=useParams();
-  console.log('params=',params)
+export default function InstructorHome() {
  //make this classList to context  
  const [classList,setClassList]=useState(initialClass);
 
@@ -20,7 +18,6 @@ export default function InstructorHome({loginInfo}) {
         <Switch>
         <PrivateRoute exact path="/instructor/dashboard/:userid">
         <InstructorDashboard 
-            loginInfo={loginInfo}
             classList={classList} 
             setClassList={setClassList}
            />
