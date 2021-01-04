@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Route,Switch} from 'react-router-dom';
 import Home from './components/Home';
 import User from './components/User';
@@ -9,7 +9,6 @@ import Register from './components/Register';
 import Login from './components/Login';
 
 export default function App() {
-   const [loginInfo,setLoginInfo]=useState('');
    
   return (
     <div className= 'app'>
@@ -22,15 +21,15 @@ export default function App() {
       <Route component={User} path='/user'/>
 
       <Route path="/login">
-        <Login setLoginInfo={setLoginInfo}/>
+        <Login/>
       </Route>  
 
       <Route path="/signup">
-        <Register setLoginInfo={setLoginInfo}/>
+        <Register/>
       </Route>  
 
       <Route path="/instructor">
-         <InstructorHome loginInfo={loginInfo} />
+         <InstructorHome />
       </Route>  
 
       </Switch> 

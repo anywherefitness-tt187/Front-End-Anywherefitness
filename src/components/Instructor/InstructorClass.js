@@ -14,9 +14,15 @@ function InstructorClass({classList,setClassList,item,}){
     //setup Modal
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () =>{
+        setShow(false);
+        const newList=classList.filter(e=>e.id !== item.id)
+        console.log('newList in delete=',newList);
+        setClassList(newList);
+    } 
+
     const handleShow = () => setShow(true);
-    const deleteClass=classList.filter(e=>e.id == item.id)
+    const deleteClass=classList.filter(e=>e.id === Number(item.id))
     console.log('deleteClass=',deleteClass);
 
 const handleUpdate=(e)=>{
@@ -29,21 +35,20 @@ const handleDelete=()=>{
 axiosWithAuth().delete(`/api/class/${item.id}`)
 .then(res=>{
     console.log('res in delete=',res)
-    const newList=classList.filter(e=>e.id !== item.id)
-    console.log('newList in delete=',newList);
-    setClassList(newList);
-    
+    handleShow();
+    // const newList=classList.filter(e=>e.id !== item.id)
+    // console.log('newList in delete=',newList);
+    // setClassList(newList);
 })  
 .catch(err=>{
     console.log('err in delete',err)
 })
-handleShow();
 }
 
 return(
     <>
     {show ?
-    <Modal show={show} onHide={handleClose} deleteClass={deleteClass}
+    <Modal show={show} onHide={handleClose} 
     backdrop="static"
     keyboard={false}
     size="lg"
@@ -56,9 +61,6 @@ return(
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-        Save Changes
         </Button>
         </Modal.Footer>
     </Modal> :

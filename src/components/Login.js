@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
@@ -13,7 +13,7 @@ export default function Login({setLoginInfo}) {
       password:"",
     }); 
     const [loading,setLoading]=useState(false);
-    const[error,setError] =useState("");
+    // const[error,setError] =useState("");
  
   
     const handleChange=(e)=>{
@@ -39,17 +39,17 @@ export default function Login({setLoginInfo}) {
             console.log('Response back from reqres:',res.data)
             setLoading(false);
             window.localStorage.setItem('token', res.data.token)
-            setLoginInfo(res.data.message)
+            // setLoginInfo(res.data.message)
             //route to client or instructor dashboard
             const loginRoute = res.data.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
             history.push(loginRoute);
             //clear server error
-            setError(null);      
+            // setError(null);      
           })
       .catch(err=>{
         console.log('error in loginData call',err);
         setLoading(false);
-        setError("Invalid Login name or Password");
+        // setError("Invalid Login name or Password");
         console.log('Login Failed for the User:',loginData.username);
       })
     }

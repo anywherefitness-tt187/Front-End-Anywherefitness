@@ -3,12 +3,12 @@ import {useHistory,useParams} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import Spinner from 'react-bootstrap/Spinner'
+import Modal from 'react-bootstrap/Modal';
 
-function InstructorCreate({classList,setClassList}){
+function InstructorCreate(){
     const history=useHistory();
     const params=useParams();
-    const [pageLoading,setPageLoading]=useState(false);
+     
     const [classInfo, setClassInfo]=useState({
         class_id:Date.now(),
         class_name:"",
@@ -19,6 +19,19 @@ function InstructorCreate({classList,setClassList}){
         class_duration:"",
         class_max_size:30,
     })
+
+    //setup Modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () =>{
+        setShow(false); 
+        history.push(`/instructor/dashboard/${params.userid}`)
+        // const newList=classList.filter(e=>e.id !== item.id)
+        // console.log('newList in delete=',newList);
+        // setClassList(newList);
+    } 
+
+    const handleShow = () => setShow(true);
 
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
     const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
@@ -99,12 +112,11 @@ function InstructorCreate({classList,setClassList}){
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth()  
-          // .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)//replace 2 with id once received from login
           .post(`/api/users/${params.userid}/class`,classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
+            handleShow();
             // setClassList([...classList,res.data])
-            history.push(`/instructor/dashboard/${params.userid}`)
             //clear server error
             // setServerError(null);      
           })
@@ -119,10 +131,23 @@ function InstructorCreate({classList,setClassList}){
 
 return(
     <>
-      {pageLoading ? 
-    <div>
-        <h4>"Please wait..."</h4> <Spinner color="primary" /> 
-    </div>: 
+    {show ?
+    <Modal show={show} onHide={handleClose}  
+    backdrop="static"
+    keyboard={false}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered>
+        <Modal.Header closeButton>
+        <Modal.Title>Hi {classInfo.username}!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body> Yay! You have successfully created your class -{classInfo.class_name} :)</Modal.Body>
+        <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+        Close
+        </Button>
+        </Modal.Footer>
+    </Modal> :   
     <div>
     <h3>Hello Instructor Name! <br/><Badge color="primary">Create new Class</Badge></h3>
     <div className="ins_create">

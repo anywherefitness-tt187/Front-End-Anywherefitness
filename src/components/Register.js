@@ -67,7 +67,7 @@ function Register({setLoginInfo}) {
       // valid is a boolean 
       setButtonIsDisabled(!valid);
     });
-  }, [userInfo]);
+  },[userInfo]);
 
     // Add a schema, used for all validation to determine whether the input is valid or not
   const formSchema = yup.object().shape({
@@ -99,10 +99,11 @@ function Register({setLoginInfo}) {
               console.log('Response back from reqres:',res.data)
               localStorage.setItem('token', res.data.token)
               console.log('role=',res.data.cred.role);
-              // setLogin(res.data.cred.username)
+              console.log('id=',res.data.data.slice(3));
+              const userId=res.data.data.slice(3);
              //route to client or instructor dashboard
-                const signupRoute = res.data.cred.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
-                history.push(signupRoute);
+                const signUpRoute = res.data.cred.role === "client" ? `/user/dashboard/${userId}` :`/instructor/dashboard/${userId}`
+                history.push(signUpRoute);
              //clear server error
               //  setServerError(null);
           })
