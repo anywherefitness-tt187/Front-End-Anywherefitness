@@ -1,37 +1,36 @@
 import React,{useState,useEffect} from 'react';
-import {Button,Card,CardTitle,CardText,CardSubtitle, CardImg} from 'reactstrap';
+import {Button,Card,CardTitle,CardImg, CardSubtitle} from 'reactstrap';
 import {useHistory,useParams} from 'react-router-dom';
-import InstructorClass from './InstructorClass';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { Spinner } from 'reactstrap';
-import imagea from '../images/undraw_fitness_stats_sht6.svg';
-import imageb from '../images/undraw_working_out_6psf.svg';
+import imagec from '../images/undraw_healthy_habit_bh5w.svg';
+import imaged from '../images/undraw_fitness_tracker_3033.svg';
 
 function EnrolledUsers(){
     const [pageLoading,setPageLoading]=useState(false);
-
+    const [enrolledList,setEnrolledList]=useState([]);
     const history=useHistory();
     const params=useParams();
-    const [userName,setUserName]=useState('')
-    console.log('id in ins dashboard=',params.userid,)
+   
+    console.log('id in erolledusers=',params)
   
-    //get all the class for this instructor user#id
+    //get all the clients enrolled for the class#id
   useEffect(()=>{
       axiosWithAuth()
-      .get(`/api/users/${params.userid}`)
+      .get(`/api/class/${params.classid}/clients`)
       .then(res=>{
           console.log('res in get user',res)
-          setUserName(res.data.username)
+          setEnrolledList(res.data)
       })
       .catch(err=>{
           console.log('err in get class',err)
       })
-      },[params.userid])
+      },[params.classid])
     
- 
+
 const handleClick=(e)=>{
  e.preventDefault();
- history.push(`/instructor/createform/${params.userid}`);
+ history.push(`/instructor/dashboard/${params.userid}`);
 }
  
 return(
@@ -42,13 +41,27 @@ return(
             </div>: 
         <>    
         <Card className="ins_card">
-        <CardTitle tag="h3">Clients enrolled for this class: </CardTitle>
         <CardImg top width="100%" 
         className="dashimage"
-        src= {imagea}> 
+        src= {imagec}> 
         </CardImg>
+        <CardTitle tag="h3">Clients enrolled for this class:
+        <br/><b>{enrolledList[0].class_name}</b></CardTitle>
+        {/* <CardSubtitle>{enrolledList[0].class_type}</CardSubtitle> */}
+       
+        {enrolledList.map(item=>{   
+        return(
+        <Card className="ins_classcard">    
+            <CardSubtitle>{item.client_name}</CardSubtitle>
+        </Card>)
+        }) 
+        }
          <Button color="warning" onClick={handleClick}>Back</Button>
-         </Card>
+         <CardImg top width="100%" 
+        className="dashimage"
+        src= {imaged}> 
+        </CardImg>
+        </Card>
         </>
         }
     </div>
