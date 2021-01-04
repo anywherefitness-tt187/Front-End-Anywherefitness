@@ -4,9 +4,8 @@ import {Button,Form,FormGroup,Label,Input} from 'reactstrap';
 import axios from "axios";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
-import NavBar from './NavBar';
 
-function Register() {
+function Register({setLoginInfo}) {
     const history=useHistory();
 
     const [userInfo, setUserInfo]=useState({
@@ -68,7 +67,7 @@ function Register() {
       // valid is a boolean 
       setButtonIsDisabled(!valid);
     });
-  }, [userInfo]);
+  },[userInfo]);
 
     // Add a schema, used for all validation to determine whether the input is valid or not
   const formSchema = yup.object().shape({
@@ -99,12 +98,14 @@ function Register() {
               //update the stored post - with response from api
               console.log('Response back from reqres:',res.data)
               localStorage.setItem('token', res.data.token)
-              console.log('token=',res.data.token);
+              console.log('role=',res.data.cred.role);
+              console.log('id=',res.data.data.slice(3));
+              const userId=res.data.data.slice(3);
              //route to client or instructor dashboard
-                const signupRoute = res.data.role === "client" ? "/user/dashboard" :"/instructor/dashboard"
-                history.push(signupRoute);
+                const signUpRoute = res.data.cred.role === "client" ? `/user/dashboard/${userId}` :`/instructor/dashboard/${userId}`
+                history.push(signUpRoute);
              //clear server error
-              // setServerError(null);
+              //  setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)
@@ -115,7 +116,6 @@ function Register() {
 
   return (
     <>
-    <NavBar/>
     <Form className="register-form"
          onSubmit={handleSubmit}
          name="register">
@@ -148,13 +148,13 @@ function Register() {
         </FormGroup>
  
         <FormGroup className="text-left">
-        <Label htmlFor="role"> Role?
+        <Label htmlFor="role" > Role
             <select 
             id="role"
             name="role"
             value={userInfo.role}
             onChange={handleChange}
-            className="mt-2"
+            className="mt-2 ml-2"
             >
             <option value="">***Please Choose One!***</option>
             <option value="client">Client</option>  

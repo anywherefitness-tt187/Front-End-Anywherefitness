@@ -1,44 +1,55 @@
 import React,{useState} from 'react';
 import { useHistory } from "react-router-dom";
-// import NavBar from './NavBar';
 import {Form,Input,Label,FormGroup,Button } from 'reactstrap';
-import NavBar from './NavBar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Spinner from 'react-bootstrap/Spinner'
 
-
-export default function Login() {
-    // const [loginInfo,setLoginInfo]=useState();
-    const history=useHistory();
+export default function Login({setLoginInfo}) {
     
+    const history=useHistory();
+    const [role,setRole]=useState('');
     const [loginData,setLoginData]=useState({
       username:"",
-      password:""
+      password:"",
     }); 
-  
-    const[error,setError] =useState("");
+    const [loading,setLoading]=useState(false);
+    // const[error,setError] =useState("");
+ 
   
     const handleChange=(e)=>{
       setLoginData({...loginData,
       [e.target.name]:e.target.value});
     }
+
+    const handleRole=(e)=>{
+      setRole(e.target.value);
+    }
   
   
     const handleSubmit=(e)=>{
-        console.log('on submit=',loginData);
       e.preventDefault();
-      axiosWithAuth() //to be replaced with axiosWithAuth once login is ready
-          .post(`/api/auth/login`, loginData)
+      setLoading(true);
+        postLogin();
+    }
+
+    const postLogin=()=>{
+      axiosWithAuth()  
+          .post(`/api/auth/login`,loginData)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            // setLoginData(res.data)
-            // window.localStorage.setItem('token', res.data)
-            history.push('/instructor/dashboard')
+            setLoading(false);
+            window.localStorage.setItem('token', res.data.token)
+            // setLoginInfo(res.data.message)
+            //route to client or instructor dashboard
+            const loginRoute = res.data.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
+            history.push(loginRoute);
             //clear server error
             // setError(null);      
           })
       .catch(err=>{
         console.log('error in loginData call',err);
-        setError("Invalid Login name or Password");
+        setLoading(false);
+        // setError("Invalid Login name or Password");
         console.log('Login Failed for the User:',loginData.username);
       })
     }
@@ -46,10 +57,14 @@ export default function Login() {
     const routeToRegister=(e)=>{
        history.push('/signup');
     }
-
+ 
 return (
     <>
-    <NavBar/>
+       {loading ? 
+       <div>
+        <h4>Loading...Please wait</h4> <Spinner color="primary" /> 
+       </div>: 
+    <div>   
     <Form className="login-form"  
       onSubmit={handleSubmit}
       name="login"
@@ -76,6 +91,21 @@ return (
         placeholder="Password"
         />
         </FormGroup>
+        <FormGroup className="text-left">
+        <Label htmlFor="role"> Role
+            <select 
+            id="role"
+            name="role"
+            value={role}
+            onChange={handleRole}
+            className="mt-2 ml-2"
+            >
+            <option value="">***Client or Instructor?***</option>
+            <option value="client">Client</option>  
+            <option value="instructor">Instructor</option>    
+            </select>
+        </Label>
+        </FormGroup>
       
        <Button className="btn-lg btn-dark btn-block"
        type="submit"
@@ -91,7 +121,8 @@ return (
           <a href="/forgot-password">Forgot Password</a>
         </div>
     </Form>
-
+    </div>
+    }
     </>   
 )
 

@@ -1,23 +1,38 @@
 import React from 'react';
-import { BrowserRouter, Route} from 'react-router-dom';
+import { Route,Switch} from 'react-router-dom';
 import Home from './components/Home';
 import User from './components/User';
 import './App.css';
+import NavBar from './components/NavBar';
 import InstructorHome from './components/Instructor/InstructorHome';
 import Register from './components/Register';
 import Login from './components/Login';
 
 export default function App() {
-
+   
   return (
-    <BrowserRouter>
     <div className= 'app'>
-      <Route component={Home} path='/' exact/>
+      <NavBar/>
+      <Switch>
+      <Route exact path="/">
+        <Home/>
+      </Route> 
+
       <Route component={User} path='/user'/>
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Register} />
-      <Route path="/instructor" component={InstructorHome} />
+
+      <Route path="/login">
+        <Login/>
+      </Route>  
+
+      <Route path="/signup">
+        <Register/>
+      </Route>  
+
+      <Route path="/instructor">
+         <InstructorHome />
+      </Route>  
+
+      </Switch> 
       </div>
-      </BrowserRouter>
   )
 }

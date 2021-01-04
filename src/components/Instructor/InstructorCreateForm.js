@@ -1,25 +1,37 @@
 import React,{useState,useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory,useParams} from 'react-router-dom';
 import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
- 
+import Modal from 'react-bootstrap/Modal';
 
-function InstructorCreate({setClassList}){
+function InstructorCreate(){
     const history=useHistory();
-    
+    const params=useParams();
+     
     const [classInfo, setClassInfo]=useState({
         class_id:Date.now(),
         class_name:"",
-        class_description:"",
         class_type:"",
         class_intensity:"",
         class_location:"",
-        class_starttime:"",
+        start_time:"",
         class_duration:"",
-        class_maxsize:"",
-        
+        class_max_size:30,
     })
+
+    //setup Modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () =>{
+        setShow(false); 
+        history.push(`/instructor/dashboard/${params.userid}`)
+        // const newList=classList.filter(e=>e.id !== item.id)
+        // console.log('newList in delete=',newList);
+        // setClassList(newList);
+    } 
+
+    const handleShow = () => setShow(true);
 
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
     const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
@@ -30,13 +42,12 @@ function InstructorCreate({setClassList}){
     // managing state for errors. empty unless inline validation (validateInput) updates key/value pair to have error
       const [errors, setErrors] = useState({
         class_name:"",
-        class_description:"",
         class_type:"",
         class_intensity:"",
         class_location:"",
-        class_starttime:"",
+        start_time:"",
         class_duration:"",
-        class_maxsize:"",
+        class_max_size:"",
       });
 
       const handleChange=(e)=>{
@@ -81,8 +92,6 @@ function InstructorCreate({setClassList}){
     class_name: yup.string()
     .min(2,"Please enter name of atleast 2 characters")
     .required("ClassName is required!"),
-    
-    class_description:yup.string(),
 
     class_type:yup.string().required("Choose Type is required!"),
 
@@ -92,24 +101,24 @@ function InstructorCreate({setClassList}){
 
     class_location: yup.string().required("Location is required!"),
 
-    class_starttime: yup.string().required("date & time is required!"),
+    start_time: yup.string().required("date & time is required!"),
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_maxsize:yup.string().required("Maxsize is required!"),
+    class_max_size:yup.number().required("Maxsize is required!"),
   });
 
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('on submit=',classInfo)
     axiosWithAuth()  
-          .post(`https://jsonplaceholder.typicode.com/posts`, classInfo)
+          .post(`/api/users/${params.userid}/class`,classInfo)
           .then((res)=>{
             console.log('Response back from reqres:',res.data)
-            setClassList(res.data)
-            history.push('/instructor')
+            handleShow();
+            // setClassList([...classList,res.data])
             //clear server error
-            setServerError(null);      
+            // setServerError(null);      
           })
           .catch((err)=>{
             console.log('server erro in post',err)
@@ -117,12 +126,30 @@ function InstructorCreate({setClassList}){
           })        
   }
   const handleBack=()=>{
-    history.push('/instructor/dashboard')
+    history.push(`/instructor/dashboard/${params.userid}`)
   }
 
 return(
     <>
-    <h3>Hello Instructor Name! <br/><Badge color="primary">Create new Class</Badge></h3>
+    {show ?
+    <Modal show={show} onHide={handleClose}  
+    backdrop="static"
+    keyboard={false}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered>
+        <Modal.Header closeButton>
+        <Modal.Title>Yay! You have successfully created your class <br/> {classInfo.class_name} :)</Modal.Title>
+        </Modal.Header>
+        <Modal.Body> Thank you!</Modal.Body>
+        <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+        Close
+        </Button>
+        </Modal.Footer>
+    </Modal> :   
+    <div>
+    <h3><Badge color="primary">Create new Class here!</Badge></h3>
     <div className="ins_create">
         <Form onSubmit={handleSubmit}
          name="inscreate">
@@ -135,17 +162,6 @@ return(
             onChange={handleChange}
             placeholder="Burn With us!"/>
              {errors.class_name.length > 0 ? <p className="error">{errors.class_name}</p> : null}
-            </FormGroup>
-
-            <FormGroup>
-            <Label htmlFor="class_description">Class Description</Label>
-            <Input name="class_description"
-            id="class_description"
-            type="textarea"
-            row="4"
-            value={classInfo.class_description}
-            onChange={handleChange}
-            placeholder="Pre-requisites, things to bring..."/>
             </FormGroup>
 
             <FormGroup>
@@ -179,7 +195,7 @@ return(
             <option>Advanced</option>
             </Input> 
             </FormGroup>
-{/* q: backend, 4 fields for location? */}
+
             <FormGroup>
             <Label htmlFor="class_location">Class Location</Label>
             <Input name="class_location"
@@ -190,11 +206,11 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_starttime">Class Start Time</Label>
-            <Input name="class_starttime"
-            id="class_starttime"
+            <Label htmlFor="start_time">Class Start Time</Label>
+            <Input name="start_time"
+            id="start_time"
             type="datetime-local"
-            value={classInfo.class_startime}
+            value={classInfo.start_time}
             onChange={handleChange}
             placeholder="00:00"/>
             </FormGroup>
@@ -203,20 +219,19 @@ return(
             <Label htmlFor="class_duration">Class Duration</Label>
             <Input name="class_duration"
             id="class_duration"
-            type="number"
             value={classInfo.class_duration}
             onChange={handleChange}
             placeholder="30minutes"/>
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_maxsize">Class Max Size</Label>
-            <Input name="class_maxsize"
-            id="class_maxsize"
+            <Label htmlFor="class_max_size">Class Max Size</Label>
+            <Input name="class_max_size"
+            id="class_max_size"
             type="number"
             min="3"
-            max="50"
-            value={classInfo.class_maxsize}
+            max="30"
+            value={classInfo.class_max_size}
             onChange={handleChange}
             />
             </FormGroup>
@@ -230,6 +245,8 @@ return(
             onClick={handleBack}>Go Back</Button>
         </Form>
     </div>
+    </div>
+    }   
     </>
 )
 }
