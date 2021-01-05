@@ -47,7 +47,7 @@ useEffect(()=>{
         console.log('err in get class',err)
     })
     //has to be id
-    },[params.userid])
+    },[params.userid,setClassList])
     // },[params.userid],classList)
 
 const handleClick=(e)=>{
@@ -67,10 +67,10 @@ return(
         <CardTitle tag="h3">Hi {userName}, Welcome to Anywhere Fitness!</CardTitle>
         <CardImg top width="100%" 
         className="dashimage"
-        src= {imagea}> 
+        src= {imageb}> 
         </CardImg>
         <CardText tag="h4">As an instructor of Anywhere Fitness, You can create new classes! update and delete them
-        also, view the registered clients for your class. Enjoy hosting fitness classes around the World!
+        also, view the registered clients for your class.<h3> Enjoy hosting fitness classes around the World!</h3>
         </CardText>
         <Button color="primary" onClick={handleClick}> <h5>Create your New Class!</h5></Button>
         </Card>
@@ -83,7 +83,7 @@ return(
         </div>
         <CardImg top width="100%" 
         className="dashimage"
-        src= {imageb}> 
+        src= {imagea}> 
         </CardImg>
         </Card>
         </>

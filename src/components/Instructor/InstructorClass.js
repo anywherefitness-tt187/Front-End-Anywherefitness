@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {useHistory,useParams} from 'react-router-dom';
 import {Button,Card,CardTitle,CardText,CardSubtitle, CardBody} from 'reactstrap';
 import { FaMapMarker,FaRegCalendar,FaClock,FaUserFriends} from 'react-icons/fa';
+import {CgUserList} from 'react-icons/cg';
 import {MdFitnessCenter} from  "react-icons/md";
 import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";
@@ -24,7 +25,7 @@ function InstructorClass({classList,setClassList,item,userName}){
 
     const handleShow = () => setShow(true);
     const deleteClass=classList.filter(e=>e.id === Number(item.id))
-    console.log('deleteClass=',deleteClass);
+   
 
 const handleUpdate=(e)=>{
  e.preventDefault();
@@ -60,9 +61,9 @@ return(
     aria-labelledby="contained-modal-title-vcenter"
     centered>
         <Modal.Header closeButton>
-        <Modal.Title>Dear {deleteClass[0].username}!</Modal.Title>
+        <Modal.Title><h3>Dear {deleteClass[0].username}!</h3></Modal.Title>
         </Modal.Header>
-        <Modal.Body>The class you created :{deleteClass[0].class_name} is deleted now...</Modal.Body>
+        <Modal.Body><h4>The class you created :{deleteClass[0].class_name} is deleted now...</h4></Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close
@@ -86,11 +87,12 @@ return(
              <CardText><GiDuration className="mr-2"/><i> Duration:</i>{item.class_duration}</CardText>
                          
              <CardText><FaUserFriends className="mr-2"/><i> Max Class Size:{item.class_max_size}</i></CardText>
+            
+             <CardText><CgUserList className="mr-2"/>
+             <b>View Enrollments for this class:</b> <Button className="enrolled"  onClick={handleEnrolled}>Clients Enrolled</Button></CardText >
              </IconContext.Provider>
-             <CardSubtitle>Click to view Clients Enrolled for this class <Button className="enrolled" onClick={handleEnrolled}>Clients Enrolled</Button></CardSubtitle>
-             
              <Button color="info" onClick={handleUpdate}>Update</Button>
-             <Button color="danger" onClick={handleDelete}>Delete</Button>
+             <Button outline color="danger"onClick={handleDelete}>Delete</Button>
              </CardBody>
         </Card>
     </div>

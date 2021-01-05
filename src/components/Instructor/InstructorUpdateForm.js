@@ -170,9 +170,9 @@ return(
     aria-labelledby="contained-modal-title-vcenter"
     centered>
         <Modal.Header closeButton>
-        <Modal.Title>Dear {classInfo.username}!</Modal.Title>
+        <Modal.Title><h3>Dear {classInfo.username}!</h3></Modal.Title>
         </Modal.Header>
-        <Modal.Body>The class you created :{classInfo.class_name} is Updated now...</Modal.Body>
+        <Modal.Body><h4>The class you created :{classInfo.class_name} is Updated now...</h4></Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close
@@ -184,7 +184,7 @@ return(
          name="inscreate">
         {serverError && <p className="error">{serverError}</p>}
             <FormGroup>
-            <Label htmlFor="class_name">Class Name</Label>
+            <Label htmlFor="class_name"><b>Class Name</b></Label>
             <Input name="class_name"
             id="class_name"
             value={classInfo.class_name}
@@ -194,7 +194,7 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_type">Class Type</Label>
+            <Label htmlFor="class_type"><b>Class Type</b></Label>
             <Input
             name="class_type"
             type="select"
@@ -211,7 +211,7 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_intensity">Class Intensity</Label>
+            <Label htmlFor="class_intensity"><b>Class Intensity</b></Label>
             <Input
             type="select"
             name="class_intensity"
@@ -226,7 +226,7 @@ return(
             </FormGroup>
  
             <FormGroup>
-            <Label htmlFor="class_location">Class Location</Label>
+            <Label htmlFor="class_location"><b>Class Location</b></Label>
             <Input name="class_location"
             id="class_location"
             value={classInfo.class_location}
@@ -235,7 +235,7 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="start_time">Class Start Time</Label>
+            <Label htmlFor="start_time"><b>Class Start Time</b></Label>
             <Input name="start_time"
             id="start_time"
             type="datetime-local"
@@ -245,7 +245,7 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_duration">Class Duration</Label>
+            <Label htmlFor="class_duration"><b>Class Duration</b></Label>
             <Input name="class_duration"
             id="class_duration"
             value={classInfo.class_duration}
@@ -254,7 +254,7 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_max_size">Class Max Size</Label>
+            <Label htmlFor="class_max_size"><b>Class Max Size</b></Label>
             <Input name="class_max_size"
             id="class_max_size"
             type="number"
