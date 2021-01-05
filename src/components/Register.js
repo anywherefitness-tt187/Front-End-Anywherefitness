@@ -13,20 +13,19 @@ function Register({setLoginInfo}) {
         password:"",
         role:"",
     })
+     
+      // managing state for errors.  
+      const [errors, setErrors] = useState({
+        username:"",
+        password:"",
+        role:"",
+      });
 
     // server error
     const [serverError, setServerError] = useState("");
 
     // control whether or not the form can be submitted if there are errors in form validation (in the useEffect)
     const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
-
-    // managing state for errors.  
-    const [errors, setErrors] = useState({
-      username:"",
-      password:"",
-      role:"",
-    });
-
 
     const handleChange=(e)=>{
         e.persist();
@@ -72,15 +71,16 @@ function Register({setLoginInfo}) {
     // Add a schema, used for all validation to determine whether the input is valid or not
   const formSchema = yup.object().shape({
     username: yup.string()
-    .min(2,"Please enter name of atleast 2 characters")
+    .min(4,"Please enter name of atleast 4 characters")
     .required("Name is required"),
     
     password: yup.string()
-    .min(4,"Please enter password of atleast 4 characters")
+    .min(5,"Please enter password of atleast 5 characters")
     .required("Please enter Password"),
 
     role: yup.string()
-    .required("Please enter role"),
+    .oneOf(["client","instructor"],"Please choose Client or Instructor")
+    .required("Please enter role!"),
    });
 
     const handleSubmit=(e)=>{
@@ -105,7 +105,7 @@ function Register({setLoginInfo}) {
                 const signUpRoute = res.data.cred.role === "client" ? `/user/dashboard/${userId}` :`/instructor/dashboard/${userId}`
                 history.push(signUpRoute);
              //clear server error
-              //  setServerError(null);
+               setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)

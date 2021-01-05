@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar';
+ 
 
 
 export default function User() {
@@ -8,9 +8,9 @@ export default function User() {
 
 
 return (
-    
-    <NavBar/>
-)
+    <div>
 
+    </div>
+)
 
 }

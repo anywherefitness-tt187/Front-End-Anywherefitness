@@ -4,6 +4,7 @@ import { Form,FormGroup,Input,Label,Button,Badge} from 'reactstrap';
 import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import Modal from 'react-bootstrap/Modal';
+import { gsap } from "gsap";
 
 function InstructorCreate(){
     const history=useHistory();
@@ -19,6 +20,12 @@ function InstructorCreate(){
         class_duration:"",
         class_max_size:30,
     })
+
+     //animation on create form whenever rendered
+     useEffect(()=>{
+      gsap.from(".ins_create",{x:10,duration: 1,ease:"slow"})
+    },[]);
+
 
     //setup Modal
     const [show, setShow] = useState(false);
@@ -93,7 +100,9 @@ function InstructorCreate(){
     .min(2,"Please enter name of atleast 2 characters")
     .required("ClassName is required!"),
 
-    class_type:yup.string().required("Choose Type is required!"),
+    class_type:yup.string()
+    .oneOf(["Strength Training","Spin Class","Power Lift","Yoga","Pilates"])
+    .required("Choose Type is required,please choose one!"),
 
     class_intensity: yup.string()
     .oneOf(["Beginner","Intermediate","Advanced"])
@@ -105,7 +114,9 @@ function InstructorCreate(){
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_max_size:yup.number().max(30).required("Maxsize is required!"),
+    class_max_size:yup.number()
+    .max(30,"Max class size allowed is 30")
+    .required("Maxsize is required!"),
   });
 
   const handleSubmit=(e)=>{
@@ -139,9 +150,9 @@ return(
     aria-labelledby="contained-modal-title-vcenter"
     centered>
         <Modal.Header closeButton>
-        <Modal.Title>Yay! You have successfully created your class <br/> {classInfo.class_name} :)</Modal.Title>
+        <Modal.Title>Yay! You have successfully created your class<h3>{classInfo.class_name}!</h3></Modal.Title>
         </Modal.Header>
-        <Modal.Body> Thank you!</Modal.Body>
+        <Modal.Body> <h4>Thank you!</h4></Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close
@@ -173,13 +184,13 @@ return(
             value={classInfo.class_type}
             onChange={handleChange}>
             <option value="">***Please Choose One!***</option>
-            <option>Strength Training</option>
-            <option>Spin Class</option>
-            <option>Power Lift</option>
-            <option>Yoga</option>
-            <option>Pilates</option>
+            <option value="Strength Training">Strength Training</option>
+            <option value="Spin Class">Spin Class</option>
+            <option value="Power Lift">Power Lift</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Pilates">Pilates</option>
             </Input> 
-            {errors.class_type > 0 ? <p className="error">{errors.class_type}</p> : null}
+            {errors.class_type.length > 0 ? <p className="error">{errors.class_type}</p> : null}
             </FormGroup>
 
             <FormGroup>
@@ -228,7 +239,6 @@ return(
             onChange={handleChange}
             placeholder="30minutes"/>
             {errors.class_duration > 0 ? <p className="error">{errors.class_duration}</p> : null}
-
             </FormGroup>
 
             <FormGroup>
@@ -241,7 +251,7 @@ return(
             value={classInfo.class_max_size}
             onChange={handleChange}
             />
-            {errors.class_max_size > 0 ? <p className="error">{errors.class_max_size}</p> : null}
+            {errors.class_max_size.length > 0 ? <p className="error">{errors.class_max_size}</p> : null}
 
             </FormGroup>
             <Button color="success"
