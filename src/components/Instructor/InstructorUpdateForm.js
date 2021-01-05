@@ -108,8 +108,10 @@ function InstructorUpdateForm({userName}){
     class_name: yup.string()
     .min(2,"Please enter name of atleast 2 characters")
     .required("ClassName is required!"),
-   
-    class_type:yup.string().required("Choose Type is required!"),
+
+    class_type:yup.string()
+    .oneOf(["Strength Training","Spin Class","Power Lift","Yoga","Pilates"])
+    .required("Choose Type is required,please choose one!"),
 
     class_intensity: yup.string()
     .oneOf(["Beginner","Intermediate","Advanced"])
@@ -121,7 +123,9 @@ function InstructorUpdateForm({userName}){
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_max_size:yup.number().required("Maxsize is required!")
+    class_max_size:yup.number()
+    .max(30,"Max class size allowed is 30")
+    .required("Maxsize is required!"),
   });
 
   const handleSubmit=(e)=>{
@@ -172,7 +176,7 @@ return(
         <Modal.Header closeButton>
         <Modal.Title><h3>Dear {classInfo.username}!</h3></Modal.Title>
         </Modal.Header>
-        <Modal.Body><h4>The class you created :{classInfo.class_name} is Updated now...</h4></Modal.Body>
+        <Modal.Body><h4>Your class is Updated now,Enjoy fitness anywhere!<h3>{classInfo.class_name}</h3> </h4></Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close
@@ -208,6 +212,7 @@ return(
             <option>Yoga</option>
             <option>Pilates</option>
             </Input> 
+            {errors.class_type.length > 0 ? <p className="error">{errors.class_type}</p> : null}
             </FormGroup>
 
             <FormGroup>
@@ -223,6 +228,7 @@ return(
             <option>Intermediate</option>
             <option>Advanced</option>
             </Input> 
+            {errors.class_intensity.length > 0 ? <p className="error">{errors.class_intensity}</p> : null}
             </FormGroup>
  
             <FormGroup>
@@ -232,6 +238,7 @@ return(
             value={classInfo.class_location}
             onChange={handleChange}
             placeholder="Street,City,State,Zip"/>
+             {errors.class_location.length > 0 ? <p className="error">{errors.class_location}</p> : null}
             </FormGroup>
 
             <FormGroup>
@@ -242,15 +249,18 @@ return(
             value={classInfo.start_time}
             onChange={handleChange}
             placeholder="00:00"/>
+             {errors.start_time.length > 0 ? <p className="error">{errors.start_time}</p> : null}
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_duration"><b>Class Duration</b></Label>
+            <Label htmlFor="class_duration"><b>Class Duration(mins)</b></Label>
             <Input name="class_duration"
             id="class_duration"
             value={classInfo.class_duration}
             onChange={handleChange}
-            placeholder="30minutes"/>
+            type="number"
+            placeholder="45"/>
+             {errors.class_duration.length > 0 ? <p className="error">{errors.class_duration}</p> : null}
             </FormGroup>
 
             <FormGroup>
@@ -263,6 +273,7 @@ return(
             value={classInfo.class_max_size}
             onChange={handleChange}
             />
+             {errors.class_max_size.length > 0 ? <p className="error">{errors.class_max_size}</p> : null}
             </FormGroup>
             <Button color="success"
             className="btn-lg  btn-block"
