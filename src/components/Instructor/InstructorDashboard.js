@@ -6,6 +6,7 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { Spinner } from 'reactstrap';
 import imagea from '../images/undraw_fitness_stats_sht6.svg';
 import imageb from '../images/undraw_working_out_6psf.svg';
+import { gsap } from "gsap";
 
 function InstructorDashboard({classList,setClassList}){
     const [pageLoading,setPageLoading]=useState(false);
@@ -49,6 +50,11 @@ useEffect(()=>{
     //has to be id
     },[params.userid,setClassList])
     // },[params.userid],classList)
+
+     //animation on dashboard form whenever rendered
+     useEffect(()=>{
+        gsap.from(".ins-dashboard",{x:10,duration: 1,ease:"slow"})
+      },[]);
 
 const handleClick=(e)=>{
  e.preventDefault();
