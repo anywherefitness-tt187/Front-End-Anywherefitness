@@ -1,5 +1,5 @@
 .app{
-  background-image: url("https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-image: url("https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
   overflow-x: hidden;
   background-size:cover;
   background-repeat: no-repeat;
@@ -12,6 +12,12 @@
   height: 100vh;
   align-items: center;
   justify-content: space-evenly;
+  background-image:url("https://images.unsplash.com/photo-1554284126-aa88f22d8b74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2057&q=80");
+  overflow-x: hidden;
+  background-size:cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width:100%
 }
  
 
@@ -37,22 +43,25 @@
 .title {
   font-size: 5vh;
   text-align: center;
+  padding-left: 2rem;
   color: #f59494;
 }
 
 .navbar {
   background-color: rgba(22, 22, 22, 0.8);
   display: flex;
-  justify-content: space-evenly;
+  padding-top: 2rem;
+  /* justify-content: space-evenly; */
 }
 
 .link {
   color: #efefef;
   display: inline-block;
-  padding: 3px 20px;
+  padding: 1.8rem 2rem;
   font-size: 1.5rem;
   text-decoration: none;
   transition: 0.3s ease all;
+  
 }
 
 .link:hover {
@@ -95,14 +104,14 @@
   display:flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 2rem, 2rem;
-  margin: 2rem 5rem;
+  padding: 2%, 2%;
+  margin: 2% 2%;
   border-radius: 4px;
-
 }
 
 .ins_home{
-background-image: url("https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+/* background-image: url("https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
+background-image:url("https://images.pexels.com/photos/4793245/pexels-photo-4793245.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
   overflow-x: hidden;
   background-size:cover;
   background-repeat: no-repeat;
@@ -113,11 +122,11 @@ background-image: url("https://images.pexels.com/photos/669578/pexels-photo-6695
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin:0 auto;
-  width:60rem;
+  margin:1rem auto;
   background-color: RGBA(255,255,255,.8) ;
   color: #101820FF;
   padding: 2rem 2rem;
+  width:90%;
   border-radius: 2px;
   box-shadow: 2px 4px #f59494;
 }
@@ -126,7 +135,8 @@ h3{
   margin:0 auto;
   text-align: center;
   padding: 2rem;
-  color: rgb(53, 62, 63);
+  /* color: rgb(53, 62, 63); */
+  color:#f59494;
   text-shadow: 0.8px rgb(117, 239, 255);
 }
 
@@ -141,8 +151,10 @@ h4{
 .enrolled{
    background-color: #f59494;
    border-color:white;
-   font-size: 1.2rem;
+   font-size: 1.1rem;
+  
 }
+ 
 .ins_create{
   display:flex;
   flex-wrap: wrap;
@@ -152,8 +164,8 @@ h4{
   margin:0 auto;
   border-radius: 2px;
   /* background-color: rgb(214, 214, 216); */
-  width:30rem;
-  background-color: RGBA(255,255,255,.7) ;
+  width:50%;
+  background-color: RGBA(255,255,255,.8) ;
   /* color:#101820FF; */
   color:#f59494;
   font-size: 1.2rem;
@@ -171,17 +183,14 @@ h4{
   display:flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items:center;
   align-content: space-around;
   border-radius: 4px;
   box-shadow: 2px 4px rgb(117, 239, 255);
   background-color: RGBA(255,255,255,.8) ;
-  /* background-color: rgb(243, 250, 252); */
-  padding:1.5rem 3.5rem;
+  padding:3.5% 0%;
   font-size:1.1rem;
-  margin: 2rem 1.5rem;
-  /* width:100%;
-  width:30rem; */
+  margin: 5% auto;
 }
 
 .dashimage{
@@ -197,12 +206,10 @@ h4{
   box-shadow: 2px 4px #f59494;;
   background-color: RGBA(255,255,255,.8) ;
   /* background-color: rgb(243, 250, 252); */
-  padding:2.5rem 1rem;
+  padding:1% 0%;
   font-size:1.1rem;
-  margin: 1.5rem 1rem;
-  /* width:100%;
-  width:50rem; */
-
+  margin: 1.5rem .1rem;
+  width:90%; 
 }
 .ins_desc{
  font-style: italic;
@@ -214,3 +221,35 @@ button{
 }
 
 /* ---- ends the css for instructor feature ---- */
+ 
+
+ /* for mobile - with Media Pixel of up to 500px display column*/
+ @media only screen and (max-width: 500px){
+
+  .navbar{
+    font-size: 1rem;
+  }
+ 
+   .link{
+    font-size: 1.4rem;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0.5rem 0.5rem;
+  } 
+  .ins_create{
+    width:90%;
+  }
+
+ 
+}
+
+/************** FOR 800 PX TAB**********************/
+@media only screen and (min-width:501px) and (max-width:810px) 
+{
+  .navbar{
+    font-size: 1.2rem;
+  }
+}
