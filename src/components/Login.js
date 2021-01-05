@@ -71,7 +71,7 @@ return (
       >
        <h2 className="text-center">Welcome !</h2>
        <FormGroup className="text-left">
-        <Label htmlFor="username"> UserName </Label>
+        <Label htmlFor="username"><b> UserName</b> </Label>
         <Input type="text"
         id="username"
         name="username"
@@ -82,7 +82,7 @@ return (
         </FormGroup>
 
         <FormGroup className="text-left">
-        <Label htmlFor="password"> Password </Label>
+        <Label htmlFor="password"><b> Password</b> </Label>
         <Input type="password"
         id="password"
         name="password"
@@ -92,7 +92,7 @@ return (
         />
         </FormGroup>
         <FormGroup className="text-left">
-        <Label htmlFor="role"> Role
+        <Label htmlFor="role"> <b>Role</b>
             <select 
             id="role"
             name="role"
@@ -107,18 +107,19 @@ return (
         </Label>
         </FormGroup>
       
-       <Button className="btn-lg btn-dark btn-block"
+       <Button className="btn-lg btn-block ml-2"
        type="submit"
+       color="primary"
        >Log in</Button>
         <p className="pt-4">Haven't registered yet?
         <Button 
-        className="ml-3"
+        className="ml-3 btn-dark "
         onClick={routeToRegister}
          >Register</Button>
          </p>
        
         <div className="text-center p-2">
-          <a href="/forgot-password">Forgot Password</a>
+          <a href="/forgot-password">Click here Forgot Password?</a>
         </div>
     </Form>
     </div>

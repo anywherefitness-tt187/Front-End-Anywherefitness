@@ -105,7 +105,7 @@ function InstructorCreate(){
 
     class_duration:yup.string().required("Duration is required!"),
     
-    class_max_size:yup.number().required("Maxsize is required!"),
+    class_max_size:yup.number().max(30).required("Maxsize is required!"),
   });
 
   const handleSubmit=(e)=>{
@@ -155,7 +155,7 @@ return(
          name="inscreate">
         {serverError && <p className="error">{serverError}</p>}
             <FormGroup>
-            <Label htmlFor="class_name">Class Name</Label>
+            <Label htmlFor="class_name"><b>Class Name</b></Label>
             <Input name="class_name"
             id="class_name"
             value={classInfo.class_name}
@@ -165,7 +165,7 @@ return(
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_type">Class Type</Label>
+            <Label htmlFor="class_type"><b>Class Type</b></Label>
             <Input
             name="class_type"
             type="select"
@@ -179,10 +179,11 @@ return(
             <option>Yoga</option>
             <option>Pilates</option>
             </Input> 
+            {errors.class_type > 0 ? <p className="error">{errors.class_type}</p> : null}
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_intensity">Class Intensity</Label>
+            <Label htmlFor="class_intensity"><b>Class Intensity</b></Label>
             <Input
             type="select"
             name="class_intensity"
@@ -194,38 +195,44 @@ return(
             <option>Intermediate</option>
             <option>Advanced</option>
             </Input> 
+            {errors.class_intensity.length > 0 ? <p className="error">{errors.class_intensity}</p> : null}
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_location">Class Location</Label>
+            <Label htmlFor="class_location"><b>Class Location</b></Label>
             <Input name="class_location"
             id="class_location"
             value={classInfo.class_location}
             onChange={handleChange}
             placeholder="Street,City,State,Zip"/>
+            {errors.class_location > 0 ? <p className="error">{errors.class_location}</p> : null}
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="start_time">Class Start Time</Label>
+            <Label htmlFor="start_time"><b>Class Start Time</b></Label>
             <Input name="start_time"
             id="start_time"
             type="datetime-local"
             value={classInfo.start_time}
             onChange={handleChange}
             placeholder="00:00"/>
+            {errors.start_time > 0 ? <p className="error">{errors.start_time}</p> : null}
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_duration">Class Duration</Label>
+            <Label htmlFor="class_duration"><b>Class Duration(minutes)</b></Label>
             <Input name="class_duration"
             id="class_duration"
             value={classInfo.class_duration}
+            type="Number"
             onChange={handleChange}
             placeholder="30minutes"/>
+            {errors.class_duration > 0 ? <p className="error">{errors.class_duration}</p> : null}
+
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="class_max_size">Class Max Size</Label>
+            <Label htmlFor="class_max_size"><b>Class Max Size</b></Label>
             <Input name="class_max_size"
             id="class_max_size"
             type="number"
@@ -234,14 +241,16 @@ return(
             value={classInfo.class_max_size}
             onChange={handleChange}
             />
+            {errors.class_max_size > 0 ? <p className="error">{errors.class_max_size}</p> : null}
+
             </FormGroup>
             <Button color="success"
-            className="btn-lg  btn-block"
+            className="btn-lg  btn-block ml-1"
             type="submit"
             disabled={buttonIsDisabled}>Create Class</Button>
-
+            
             <Button color="warning"
-            className="btn-lg  btn-block"
+            className="btn-lg  btn-block ml-1"
             onClick={handleBack}>Go Back</Button>
         </Form>
     </div>

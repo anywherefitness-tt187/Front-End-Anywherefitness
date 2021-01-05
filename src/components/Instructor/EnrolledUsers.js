@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {Button,Card,CardTitle,CardImg, CardSubtitle} from 'reactstrap';
+import {Button,Card,CardTitle,CardImg, CardSubtitle, CardText} from 'reactstrap';
 import {useHistory,useParams} from 'react-router-dom';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { Spinner } from 'reactstrap';
@@ -16,11 +16,13 @@ function EnrolledUsers(){
   
     //get all the clients enrolled for the class#id
   useEffect(()=>{
+      setPageLoading(true)
       axiosWithAuth()
       .get(`/api/class/${params.classid}/clients`)
       .then(res=>{
-          console.log('res in get user',res)
+          console.log('res in get client',res)
           setEnrolledList(res.data)
+          setPageLoading(false)
       })
       .catch(err=>{
           console.log('err in get class',err)
@@ -46,17 +48,19 @@ return(
         src= {imagec}> 
         </CardImg>
         <CardTitle tag="h3">Clients enrolled for this class:
-        <br/><b>{enrolledList[0].class_name}</b></CardTitle>
-        {/* <CardSubtitle>{enrolledList[0].class_type}</CardSubtitle> */}
-       
-        {enrolledList.map(item=>{   
+        </CardTitle>
+        
+        {enrolledList.length ===0 ? <CardText><h4>No users enrolled in this class...</h4></CardText> :
+        //  <CardSubtitle>{enrolledList[0].class_type}</CardSubtitle> 
+        enrolledList.map(item=>{   
         return(
-        <Card className="ins_classcard">    
-            <CardSubtitle>{item.client_name}</CardSubtitle>
+        <Card key={item.client_name} className="ins_classcard">  
+            <CardText className="mr-2 ml-2"><i>{item.class_name}</i></CardText>  
+            <CardSubtitle className="mr-2 ml-2"><b>User: </b>{item.client_name}</CardSubtitle>
         </Card>)
-        }) 
-        }
-         <Button color="warning" onClick={handleClick}>Back</Button>
+        })
+        } 
+         <Button color="warning"  onClick={handleClick}>Go Back</Button>
          <CardImg top width="100%" 
         className="dashimage"
         src= {imaged}> 
