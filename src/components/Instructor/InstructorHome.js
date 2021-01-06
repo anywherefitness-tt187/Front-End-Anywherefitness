@@ -26,11 +26,11 @@ export default function InstructorHome() {
         </PrivateRoute>
         
         <Route exact path="/instructor/createform/:userid">
-            <InstructorCreateForm classList={classList} setClassList={setClassList}  />
+            <InstructorCreateForm />
         </Route>
         
         <Route path="/instructor/:userid/updateform/:classid">
-            <InstructorUpdateForm classList={classList} setClassList={setClassList}  />
+            <InstructorUpdateForm  />
         </Route>
 
         <Route path="/instructor/:userid/enrolled/:classid">

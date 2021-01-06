@@ -104,8 +104,8 @@ export default function Login({setLoginInfo}) {
           .post(`/api/auth/login`,loginPayload)
           .then((res)=>{
             console.log('Response back from reqres role:',res.data)
+            localStorage.setItem('token', res.data.token)
             setLoading(false);
-            window.localStorage.setItem('token', res.data.token)
             // setLoginInfo(res.data.message)
             //route to client or instructor dashboard
             const loginRoute = loginData.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
