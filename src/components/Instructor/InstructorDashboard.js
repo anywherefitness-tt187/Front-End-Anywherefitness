@@ -16,7 +16,7 @@ function InstructorDashboard({classList,setClassList}){
     const [userName,setUserName]=useState('')
     console.log('id in ins dashboard=',params.userid,)
   
-    //get all the class for this instructor user#id
+    //get the username for the instructor user#id
   useEffect(()=>{
       axiosWithAuth()
       .get(`/api/users/${params.userid}`)
@@ -47,9 +47,8 @@ useEffect(()=>{
         setPageLoading(false);
         console.log('err in get class',err)
     })
-    //has to be id
     },[params.userid,setClassList])
-    // },[params.userid],classList)
+ 
 
      //animation on dashboard form whenever rendered
      useEffect(()=>{

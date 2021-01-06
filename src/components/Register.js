@@ -97,7 +97,7 @@ function Register({setLoginInfo}) {
           .then((res)=>{
               //update the stored post - with response from api
               console.log('Response back from reqres:',res.data)
-              localStorage.setItem('token', res.data.token)
+              window.localStorage.setItem('token', res.data.token)
               console.log('role=',res.data.cred.role);
               console.log('id=',res.data.data.slice(3));
               const userId=res.data.data.slice(3);
@@ -105,7 +105,7 @@ function Register({setLoginInfo}) {
                 const signUpRoute = res.data.cred.role === "client" ? `/user/dashboard/${userId}` :`/instructor/dashboard/${userId}`
                 history.push(signUpRoute);
              //clear server error
-               setServerError(null);
+              //  setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)

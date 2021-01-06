@@ -8,13 +8,23 @@ import { GiWeightLiftingUp,GiDuration } from "react-icons/gi";
 import {IconContext} from "react-icons";
 import {axiosWithAuth} from '../../utils/axiosWithAuth';
 import Modal from 'react-bootstrap/Modal';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
  
- 
-function InstructorClass({classList,setClassList,item,userName}){
+function InstructorClass({classList,setClassList,item}){
     const history=useHistory();
     const params=useParams();
     //setup Modal
     const [show, setShow] = useState(false);
+    
+    // const popover = (
+    //     <Popover id="popover-basic">
+    //       <Popover.Title as="h3">This will remove your class</Popover.Title>
+    //       <Popover.Content>
+    //         Are you sure to delete ? As Deleting the class<strong>will trigger email</strong> to all the clients enrolled in it.
+    //       </Popover.Content>
+    //     </Popover>
+    //   );
 
     const handleClose = () =>{
         setShow(false);
@@ -92,7 +102,11 @@ return(
              <b>View Enrollments for this class:</b> <Button className="enrolled"  onClick={handleEnrolled}>Clients Enrolled</Button></CardText >
              </IconContext.Provider>
              <Button color="info" onClick={handleUpdate}>Update</Button>
+
+             {/* <OverlayTrigger trigger="click" placement="right" overlay={popover}> */}
              <Button outline color="danger"onClick={handleDelete}>Delete</Button>
+             {/* </OverlayTrigger> */}
+
              </CardBody>
         </Card>
     </div>
