@@ -176,7 +176,7 @@ return(
         <Modal.Header closeButton>
         <Modal.Title><h3>Dear {classInfo.username}!</h3></Modal.Title>
         </Modal.Header>
-        <Modal.Body><h4>Your class is Updated now,Enjoy fitness anywhere!<h3>{classInfo.class_name}</h3> </h4></Modal.Body>
+        <Modal.Body><h4>Your class is Updated now,Enjoy fitness anywhere!</h4><h3>{classInfo.class_name}</h3> </Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
         Close

@@ -105,7 +105,7 @@ function Register({setLoginInfo}) {
                 const signUpRoute = res.data.cred.role === "client" ? `/user/dashboard/${userId}` :`/instructor/dashboard/${userId}`
                 history.push(signUpRoute);
              //clear server error
-               setServerError(null);
+              //  setServerError(null);
           })
           .catch((err)=>{
             console.log('server erro in post',err)
