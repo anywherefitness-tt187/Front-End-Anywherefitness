@@ -76,8 +76,9 @@ return(
         src= {imageb}> 
         </CardImg>
         <CardText tag="h4">As an instructor of Anywhere Fitness, You can create new classes! update and delete them
-        also, view the registered clients for your class.<h3> Enjoy hosting fitness classes around the World!</h3>
-        </CardText>
+        also, view the registered clients for your class.</CardText>
+        <h3> Enjoy hosting fitness classes around the World!</h3>
+        
         <Button color="primary" onClick={handleClick}> <h5>Create your New Class!</h5></Button>
         </Card>
         <div className="ins_classlist">

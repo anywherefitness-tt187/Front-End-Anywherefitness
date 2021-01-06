@@ -103,12 +103,12 @@ export default function Login({setLoginInfo}) {
       axiosWithAuth()  
           .post(`/api/auth/login`,loginPayload)
           .then((res)=>{
-            console.log('Response back from reqres:',res.data)
+            console.log('Response back from reqres role:',res.data)
             setLoading(false);
             window.localStorage.setItem('token', res.data.token)
             // setLoginInfo(res.data.message)
             //route to client or instructor dashboard
-            const loginRoute = res.data.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
+            const loginRoute = loginData.role === "client" ? `/user/dashboard/${res.data.id}` :`/instructor/dashboard/${res.data.id}`
             history.push(loginRoute);
             //clear server error
             // setError(null);      
