@@ -97,7 +97,7 @@ function Register({setLoginInfo}) {
           .then((res)=>{
               //update the stored post - with response from api
               console.log('Response back from reqres:',res.data)
-              localStorage.setItem('token', res.data.token)
+              window.localStorage.setItem('token', res.data.token)
               console.log('role=',res.data.cred.role);
               console.log('id=',res.data.data.slice(3));
               const userId=res.data.data.slice(3);

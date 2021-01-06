@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import Modal from 'react-bootstrap/Modal';
 
-function InstructorUpdateForm({userName}){
+function InstructorUpdateForm(){
     const [updated,setUpdated]=useState(false);
     const history=useHistory();
     const params = useParams(); 
