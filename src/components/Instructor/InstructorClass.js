@@ -105,7 +105,7 @@ return(
 
              <OverlayTrigger  
               trigger={['click', 'focus','hover']} 
-              placement="top" overlay={popover}>
+              placement="right" overlay={popover}>
              <Button outline color="danger"onClick={handleDelete}>Delete</Button>
              </OverlayTrigger>
 
