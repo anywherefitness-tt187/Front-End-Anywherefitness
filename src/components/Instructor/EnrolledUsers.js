@@ -26,6 +26,7 @@ function EnrolledUsers(){
       })
       .catch(err=>{
           console.log('err in get class',err)
+          setPageLoading(false)
       })
       },[params.classid])
     
@@ -39,7 +40,7 @@ return(
     <div className="ins_dashboard">
         {pageLoading ? 
             <div className="ins_dashboard">
-                <h4>Loading...Please wait!" <Spinner color="primary" /> </h4>
+                <h4>Loading...Please wait!"</h4> <Spinner color="primary" /> 
             </div>: 
         <>    
         <Card className="ins_card">
@@ -54,7 +55,7 @@ return(
         //  <CardSubtitle>{enrolledList[0].class_type}</CardSubtitle> 
         enrolledList.map(item=>{   
         return(
-        <Card key={item.client_name} className="ins_classcard">  
+        <Card key={item.client_name} className="ins_classcard p-4">  
             <CardText className="mr-2 ml-2"><i>{item.class_name}</i></CardText>  
             <CardSubtitle className="mr-2 ml-2"><b>User: </b>{item.client_name}</CardSubtitle>
         </Card>)

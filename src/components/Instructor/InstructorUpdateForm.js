@@ -110,7 +110,7 @@ function InstructorUpdateForm(){
     .required("ClassName is required!"),
 
     class_type:yup.string()
-    .oneOf(["Strength Training","Spin Class","Power Lift","Yoga","Pilates"])
+    .oneOf(["Strength Training","Spin Class","Power Lift","Yoga","Pilates","Weight Lifting"])
     .required("Choose Type is required,please choose one!"),
 
     class_intensity: yup.string()
@@ -138,7 +138,7 @@ function InstructorUpdateForm(){
         class_max_size: classInfo.class_max_size,
         class_duration: classInfo.class_duration,
         class_type: classInfo.class_type,
-        start_time: classInfo.class_time,
+        start_time: classInfo.start_time,
         }; 
 
       console.log('updated class=',updatedClassInfo)
@@ -161,7 +161,7 @@ function InstructorUpdateForm(){
   }
 
   const handleBack=()=>{
-    history.push(`/instructor/dashboard/${params.id}`)
+    history.push(`/instructor/dashboard/${params.userid}`)
   }
 return(
     <>
@@ -211,6 +211,7 @@ return(
             <option>Power Lift</option>
             <option>Yoga</option>
             <option>Pilates</option>
+            <option>Weight Lifting</option>
             </Input> 
             {errors.class_type.length > 0 ? <p className="error">{errors.class_type}</p> : null}
             </FormGroup>
