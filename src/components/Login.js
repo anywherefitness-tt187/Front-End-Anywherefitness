@@ -52,7 +52,6 @@ export default function Login({setLoginInfo}) {
     yup.reach(formSchema, e.target.name)
     .validate(e.target.value)
     .then((valid) => {
-      // the input is passing!
       // the reset of that input's error
       console.log("valid here", e.target.name);
       setErrors({ ...errors, [e.target.name]: "" });

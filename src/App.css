@@ -73,7 +73,7 @@
 
 .register-form{
   width:100%;
-  max-width: 40rem;
+  max-width: 50%;
   padding:4% 10%;
   margin:auto;
   margin-top: 6rem;
@@ -87,7 +87,7 @@
 
 .login-form{
   width:100%;
-  max-width: 45%;
+  max-width: 50%;
   padding:3% 4%;
   margin:auto;
   margin-top: 3rem;
@@ -126,7 +126,7 @@ background-image:url("https://images.pexels.com/photos/4793245/pexels-photo-4793
   background-color: RGBA(255,255,255,.8) ;
   color: #101820FF;
   padding: 2rem 2rem;
-  width:80%;
+  width:85%;
   border-radius: 2px;
   box-shadow: 2px 4px #f59494;
 }
@@ -241,8 +241,12 @@ button{
   .ins_create{
     width:90%;
   }
-
- 
+  .login-form{
+    max-width: 85%;
+  }
+  .register-form{
+    max-width: 85%;
+  }
 }
 
 /************** FOR 800 PX TAB**********************/
