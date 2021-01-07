@@ -17,14 +17,14 @@ function InstructorClass({classList,setClassList,item}){
     //setup Modal
     const [show, setShow] = useState(false);
     
-    // const popover = (
-    //     <Popover id="popover-basic">
-    //       <Popover.Title as="h3">This will remove your class</Popover.Title>
-    //       <Popover.Content>
-    //         Are you sure to delete ? As Deleting the class<strong>will trigger email</strong> to all the clients enrolled in it.
-    //       </Popover.Content>
-    //     </Popover>
-    //   );
+    const popover = (
+        <Popover id="popover-basic">
+          <Popover.Title as="h3">Watch out ! this action will remove your class</Popover.Title>
+          <Popover.Content>
+            Are you sure to delete ? Deleting the class <strong>will trigger email</strong> to all the clients enrolled in it.
+          </Popover.Content>
+        </Popover>
+      );
 
     const handleClose = () =>{
         setShow(false);
@@ -103,9 +103,9 @@ return(
              </IconContext.Provider>
              <Button color="info" onClick={handleUpdate}>Update</Button>
 
-             {/* <OverlayTrigger trigger="click" placement="right" overlay={popover}> */}
+             <OverlayTrigger trigger='click' placement="right" overlay={popover}>
              <Button outline color="danger"onClick={handleDelete}>Delete</Button>
-             {/* </OverlayTrigger> */}
+             </OverlayTrigger>
 
              </CardBody>
         </Card>
