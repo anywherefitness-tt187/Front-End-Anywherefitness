@@ -103,7 +103,9 @@ return(
              </IconContext.Provider>
              <Button color="info" onClick={handleUpdate}>Update</Button>
 
-             <OverlayTrigger trigger='click' placement="right" overlay={popover}>
+             <OverlayTrigger  
+              trigger={['click', 'focus','hover']} 
+              placement="right" overlay={popover}>
              <Button outline color="danger"onClick={handleDelete}>Delete</Button>
              </OverlayTrigger>
 
