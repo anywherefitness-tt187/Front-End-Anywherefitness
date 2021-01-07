@@ -82,7 +82,7 @@ return(
     </Modal> :
     <div className="ins_classes">
         <Card className="ins_classcard">
-        <CardTitle tag="h5">{item.class_name} in Anywhere Fitness!</CardTitle>
+        <CardTitle tag="h4">{item.class_name}!</CardTitle>
         <CardSubtitle><MdFitnessCenter/>Type:{item.class_type}</CardSubtitle>
         <CardBody>
         <IconContext.Provider value={{style:{ color: "rgb(117, 239, 255)",fontSize: '25px'}}}>
@@ -99,7 +99,7 @@ return(
              <CardText><FaUserFriends className="mr-2"/><i> Max Class Size:{item.class_max_size}</i></CardText>
             
              <CardText><CgUserList className="mr-2"/>
-             <b>View Enrollments for this class:</b> <Button className="enrolled"  onClick={handleEnrolled}>Clients Enrolled</Button></CardText >
+             <b>View Enrollments :</b> <Button className="enrolled"  onClick={handleEnrolled}>Clients Enrolled</Button></CardText >
              </IconContext.Provider>
              <Button color="info" onClick={handleUpdate}>Update</Button>
 
