@@ -11,7 +11,7 @@ function InstructorCreate(){
     const params=useParams();
      
     const [classInfo, setClassInfo]=useState({
-        class_id:Date.now(),
+        // class_id:Date.now(),
         class_name:"",
         class_type:"",
         class_intensity:"",
@@ -101,7 +101,7 @@ function InstructorCreate(){
     .required("ClassName is required!"),
 
     class_type:yup.string()
-    .oneOf(["Strength Training","Spin Class","Power Lift","Yoga","Pilates"])
+    .oneOf(["Strength Training","Spin Class","Power Lift","Yoga","Pilates","Weight Lifting"])
     .required("Choose Type is required,please choose one!"),
 
     class_intensity: yup.string()
