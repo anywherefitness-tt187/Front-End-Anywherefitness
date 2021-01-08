@@ -52,7 +52,7 @@ useEffect(()=>{
 
      //animation on dashboard form whenever rendered
      useEffect(()=>{
-        gsap.from(".ins-dashboard",{x:10,duration: 1,ease:"slow"})
+        gsap.from(".ins_dashboard",{x:10,duration: 1,ease:"slow"})
       },[]);
 
 const handleClick=(e)=>{
