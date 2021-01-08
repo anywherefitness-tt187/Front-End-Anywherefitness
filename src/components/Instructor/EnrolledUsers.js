@@ -48,11 +48,11 @@ return(
         className="dashimage"
         src= {imagec}> 
         </CardImg>
-        <CardTitle tag="h3">Clients enrolled for this class:
-        </CardTitle>
+        <CardTitle tag="h3">Clients enrolled for this class: </CardTitle>  
         
-        {enrolledList.length ===0 ? <CardText><h4>No users enrolled in this class...</h4></CardText> :
-        //  <CardSubtitle>{enrolledList[0].class_type}</CardSubtitle> 
+        {enrolledList.length ===0 ? 
+        <h4>No users enrolled in this class...</h4> :
+        
         enrolledList.map(item=>{   
         return(
         <Card key={item.client_name} className="ins_classcard p-4">  
