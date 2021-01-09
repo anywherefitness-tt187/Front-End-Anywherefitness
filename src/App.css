@@ -51,6 +51,7 @@
   background-color: rgba(22, 22, 22, 0.8);
   display: flex;
   padding-top: 2rem;
+  padding-right: 3rem;
   /* justify-content: space-evenly; */
 }
 
@@ -202,7 +203,7 @@ h4{
   align-items: flex-start;
   align-content: space-around;
   border-radius: 4px;
-  box-shadow: 2px 4px #f59494;;
+  box-shadow: 2px 4px #f59494;
   background-color: RGBA(255,255,255,.8) ;
   /* background-color: rgb(243, 250, 252); */
   padding:1% 1.5%;
@@ -220,7 +221,51 @@ button{
 }
 
 /* ---- ends the css for instructor feature ---- */
- 
+/*for darkmode */
+.dark-mode .navbar {
+  color: rgb(53, 62, 63);
+  background-color: #f7e0e0;
+}
+.dark-mode .link{
+  color:rgba(22, 22, 22, 0.8);
+}
+
+.dark-mode .ins_card{
+  background-color: #d4d1d1;
+}
+
+.dark-mode .ins_classcard{
+  background-color: #645c5c;
+  color:#f7e0e0;
+}
+
+.dark-mode .ins_intro{
+  background-color: #837f7f;
+  color:#f7e0e0;
+}
+.dark-mode__toggle {
+  background: #f3d2d2;
+  border-radius: 50px;
+  border: 1px solid black;
+  height: 20px;
+  position: relative;
+  width: 40px;
+}
+
+.toggle {
+  background: #f59494;
+  border-radius: 50px;
+  height: 18px;
+  left: 0;
+  position: absolute;
+  transition: 0.2s;
+  width: 20px;
+}
+
+.toggled {
+  left: 18px;
+}
+
 
  /* for mobile - with Media Pixel of up to 500px display column*/
  @media only screen and (max-width: 500px){
