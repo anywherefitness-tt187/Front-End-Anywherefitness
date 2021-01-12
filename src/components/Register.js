@@ -157,7 +157,7 @@ function Register({setLoginInfo}) {
             className="mt-2 ml-2"
             >
             <option value="">***Please Choose One!***</option>
-            <option value="client">Client</option>  
+            <option disabled="true" value="client">Client</option>  
             <option value="instructor">Instructor</option>    
             </select>
             {errors.role.length > 0 ? <p className="error">{errors.role}</p> : null}

@@ -174,7 +174,7 @@ return (
             className="mt-2 ml-2"
             >
             <option value="">***Client or Instructor?***</option>
-            <option value="client">Client</option>  
+            <option disabled="true" value="client">Client</option>  
             <option value="instructor">Instructor</option>    
             </select>
         </Label>
