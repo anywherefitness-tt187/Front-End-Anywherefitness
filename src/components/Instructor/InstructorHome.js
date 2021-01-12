@@ -10,8 +10,8 @@ import initialClass from './TestData';
 export default function InstructorHome() {
    
  //make this classList to context  
- const [classList,setClassList]=useState(initialClass);
-
+//  const [classList,setClassList]=useState(initialClass);
+const [classList,setClassList]=useState([]);
 //  const [classDelete,setClassDelete]=useState(false);
  console.log('classList=',classList);
 
