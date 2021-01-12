@@ -6,6 +6,7 @@ import './App.css';
 import useDarkMode from './components/useDarkMode';
 import NavBar from './components/NavBar';
 import InstructorHome from './components/Instructor/InstructorHome';
+import ClientHome from './components/client/ClientHome';
 import Register from './components/Register';
 import Login from './components/Login';
 
@@ -32,6 +33,10 @@ export default function App() {
       <Route path="/instructor">
          <InstructorHome />
       </Route>  
+
+      <Route path="/client">
+        <ClientHome />
+      </Route>
 
       </Switch> 
       </div>
