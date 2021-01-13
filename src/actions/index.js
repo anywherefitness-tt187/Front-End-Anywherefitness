@@ -32,6 +32,11 @@ export const GET_CLASSES_START = 'GET_CLASSES_START';
 export const GET_CLASSES_SUCCESS = 'GET_CLASSES_SUCCESS';
 export const GET_CLASSES_FAILURE = 'GET_CLASSES_FAILURE';
 
+// Registered Clients
+export const GET_REGISTERED_CLIENTS = "GET_REGISTERED_CLIENTS_START";
+export const GET_REGISTERED_CLIENTS_SUCCESS = 'GET_REGISTERED_CLIENTS_SUCCESS';
+export const GET_REGISTERED_CLIENTS_FAILURE = 'GET_REGISTERED_CLIENTS_FAILURE';
+
 export const DELETE_CLASS_START = 'DELETE_CLASS_START';
 export const DELETE_CLASS_SUCCESS = 'DELETE_CLASS_SUCCESS';
 export const DELETE_CLASS_FAILURE = 'DELETE_CLASS_FAILURE';
@@ -48,11 +53,15 @@ export const SCHEDULE_CLASS_START = 'SCHEDULE_CLASS_START';
 export const SCHEDULE_CLASS_SUCCESS = 'SCHEDULE_CLASS_SUCCESS';
 export const SCHEDULE_CLASS_FAILURE = 'SCHEDULE_CLASS_FAILURE';
 
+export const UNSCHEDULE_CLASS_START = 'UNSCHEDULE_CLASS_START';
+export const UNSCHEDULE_CLASS_SUCCESS = 'UNSCHEDULE_CLASS_SUCCESS';
+export const UNSCHEDULE_CLASS_FAILURE = 'UNSCHEDULE_CLASS_FAILURE';
+
 
 export const scheduleClass = (classId, params) => dispatch => {
     dispatch({ type: SCHEDULE_CLASS_START })
     axiosWithAuth()
-        .post(`/class/${classId}/clients`, params)
+        .post(`/api/class/${classId}/clients`, params)
         .then(res => {
             dispatch({ type: SCHEDULE_CLASS_SUCCESS, payload: res.data });
         })
@@ -60,10 +69,19 @@ export const scheduleClass = (classId, params) => dispatch => {
             console.log(err.message);
             dispatch({ type: SCHEDULE_CLASS_FAILURE, payload: err.response });
         })
-    return { type: SCHEDULE_CLASS, payload: scheduleClass }
+
 }
-export const unscheduleClass = unscheduleClass => {
-    return { type: UNSCHEDULE_CLASS, payload: unscheduleClass }
+export const unscheduleClass = (registeredClientId) => dispatch => {
+    dispatch({ type: UNSCHEDULE_CLASS_START })
+    axiosWithAuth()
+        .delete(`/api/registered_client/${registeredClientId}`)
+        .then(res => {
+            dispatch({ type: UNSCHEDULE_CLASS_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            console.log(err.message);
+            dispatch({ type: UNSCHEDULE_CLASS_FAILURE, payload: err.response });
+        })
 }
 
 export const addPass = newPass => {
@@ -81,6 +99,16 @@ export const fetchClasses = () => dispatch => {
         .get("/api/class") // https://anywherefitness187.herokuapp.com/api/classes
         .then(res => {
             dispatch({ type: FETCHCLASS_SUCCESS, payload: res.data })
+        })
+        .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
+}
+
+export const fetchRegisteredClients = () => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axiosWithAuth()
+        .get("/api/registered_client")
+        .then(res => {
+            dispatch({ type: GET_REGISTERED_CLIENTS_SUCCESS, payload: res.data })
         })
         .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
 }

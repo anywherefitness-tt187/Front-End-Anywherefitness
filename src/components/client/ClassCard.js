@@ -75,63 +75,55 @@ const Attendees = styled.p`
 
 
 const ClassCard = function (props) {
-    const { 
-        item, 
-        index, 
-        scheduleClass, 
-        unscheduleClass, 
-        setUnScheduledClass, 
-        setDisplayedClasses 
+    const {
+        klass,
+        index,
+        scheduleClass,
+        unscheduleClass,
+        isScheduled,
     } = props;
 
-    const handleScheduleClassClick = () => {
-        const classId = item.id;
-        const params = {
-            client_name: sessionStorage.getItem("userId")
-        };
-        scheduleClass(classId, params);
-    };
+    const handleClick = () => {
+        if (isScheduled) { // unschedule
+            unscheduleClass(klass.registeredClient.id);
+        } else { // schedule
+            const classId = klass.id;
+            const params = {
+                client_name: localStorage.getItem("username")
+            };
+            scheduleClass(classId, params);
+        }
+    }
 
-    const handleUnscheduleClassClick = () => {
-        unscheduleClass(item);
-        setUnScheduledClass(filteredClass =>
-            filteredClass.filter((item, i) => i !== index)
-        );
-        setDisplayedClasses(filteredClass =>
-            filteredClass.filter((item, i) => i !== index)
-        );
-    };
     return (
         <StyledClassCard key={index}>
             <FlexboxRow>
                 <div>
-                    <ClassName>{item.class_name}</ClassName>
-                    <InstructorAndLocation> at {item.class_location}</InstructorAndLocation>
+                    <ClassName>{klass.class_name}</ClassName>
+                    <InstructorAndLocation> at {klass.class_location}</InstructorAndLocation>
                 </div>
                 <IntensityDescription>
                     <IntensityText>
-                        {item.class_intensity}
+                        {klass.class_intensity}
                     </IntensityText>
-                    <br />Intensity<br />{item.class_type}
+                    <br />Intensity<br />{klass.class_type}
                 </IntensityDescription>
             </FlexboxRow>
             <StyledHr />
             <FlexboxRow>
                 <FlexboxCol>
-                    <ClassTime>{item.start_time}<br />({item.class_duration} min)</ClassTime>
+                    <ClassTime>{klass.start_time}<br />({klass.class_duration} min)</ClassTime>
                 </FlexboxCol>
 
                 <FlexboxCol>
                     <Attendees>
-                        Attending: {item.attendees} / {item.class_max_size}
+                        Attending: {klass.attendees} / {klass.class_max_size}
                     </Attendees>
-                    {scheduleClass ? (
-                    <button onClick={handleScheduleClassClick}>
-                        Schedule Class
-                    </button>) 
-                    : (<button onClick={handleUnscheduleClassClick}>
-                            Unschedule Class
-                        </button>)}
+
+                    <button onClick={handleClick}>
+                        {!isScheduled ? "Schedule Class" : "Unschedule Class"}
+                    </button>
+
                 </FlexboxCol>
             </FlexboxRow>
         </StyledClassCard>
@@ -140,8 +132,6 @@ const ClassCard = function (props) {
 
 const mapStateToProps = state => {
     return {
-      classes: state.classes,
-      scheduledClasses: state.scheduledClasses
     };
-  };
-  export default connect(mapStateToProps, { scheduleClass, unscheduleClass })(ClassCard);
+};
+export default connect(mapStateToProps, { scheduleClass, unscheduleClass })(ClassCard);

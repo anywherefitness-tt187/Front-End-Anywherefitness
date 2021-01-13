@@ -103,10 +103,15 @@ export default function Login({ setLoginInfo }) {
     axiosWithAuth()
       .post(`/api/auth/login`, loginPayload)
       .then((res) => {
-        localStorage.setItem('token', res.data.token)
         setLoading(false);
         const userId = res.data.id;
         const role = loginData.role;
+        const username = loginData.username;
+
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('username', username);
+        localStorage.setItem('userId', res.data.id)
+        
         if (role === "client") {
           history.push(`/client/dashboard/${userId}`);
         } else {

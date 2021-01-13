@@ -7,6 +7,7 @@ import useDarkMode from './components/useDarkMode';
 import NavBar from './components/NavBar';
 import InstructorHome from './components/Instructor/InstructorHome';
 import ClientHome from './components/client/ClientHome';
+import ScheduledClasses from './components/client/ScheduledClasses';
 import Register from './components/Register';
 import Login from './components/Login';
 
@@ -34,8 +35,12 @@ export default function App() {
          <InstructorHome />
       </Route>  
 
-      <Route path="/client">
+      <Route path="/client/dashboard">
         <ClientHome />
+      </Route>
+
+      <Route path="/client/registered-classes">
+        <ScheduledClasses />
       </Route>
 
       </Switch> 

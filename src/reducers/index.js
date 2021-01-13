@@ -19,13 +19,13 @@ import {
     GET_CLASSES_START,
     GET_CLASSES_SUCCESS,
     GET_CLASSES_FAILURE,
+    GET_REGISTERED_CLIENTS_START,
+    GET_REGISTERED_CLIENTS_SUCCESS,
+    GET_REGISTERED_CLIENTS_FAILURE,
   } from "../actions/index";
   
   const initialState = {
     //holder
-    twoClasses: [
-      {}
-    ],
     classes: [
     ],
     passes: [
@@ -64,7 +64,7 @@ import {
         classesRemaining: 4,
       }
     ],
-    scheduledClasses: [],
+    registeredClients: [],
     user: "",
     isFetching: false,
     error: '',
@@ -84,7 +84,7 @@ import {
       case SCHEDULE_CLASS:
         return {
           ...state,
-          scheduledClasses: [...state.scheduledClasses, action.payload],
+          registeredClient: [...state.registeredClient, action.payload],
           classes: [...state.classes.filter((item, index) => {
             return item !== action.payload;
           })]
@@ -92,8 +92,8 @@ import {
       case UNSCHEDULE_CLASS:
         return {
           ...state,
-          scheduledClasses: [
-            ...state.scheduledClasses.filter((item, index) => {
+          registeredClient: [
+            ...state.registeredClient.filter((item, index) => {
               return item !== action.payload;
             })
           ],
@@ -205,6 +205,14 @@ import {
           ...state,
           isFetching: false,
           error: action.payload
+        };
+
+      case GET_REGISTERED_CLIENTS_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          error: '',
+          registeredClients: action.payload
         };
       case ADD_USER:
         return {
