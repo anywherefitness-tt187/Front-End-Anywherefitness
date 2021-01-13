@@ -12,7 +12,7 @@ function EnrolledUsers(){
     const history=useHistory();
     const params=useParams();
    
-    console.log('id in erolledusers=',params)
+    // console.log('id in erolledusers=',params)
   
     //get all the clients enrolled for the class#id
   useEffect(()=>{
@@ -20,12 +20,12 @@ function EnrolledUsers(){
       axiosWithAuth()
       .get(`/api/class/${params.classid}/clients`)
       .then(res=>{
-          console.log('res in get client',res)
+        //   console.log('res in get client',res)
           setEnrolledList(res.data)
           setPageLoading(false)
       })
       .catch(err=>{
-          console.log('err in get class',err)
+        //   console.log('err in get class',err)
           setPageLoading(false)
       })
       },[params.classid])
@@ -53,9 +53,9 @@ return(
         {enrolledList.length ===0 ? 
         <h4>No users enrolled in this class...</h4> :
         
-        enrolledList.map(item=>{   
+        enrolledList.map(item=>{
         return(
-        <Card key={item.client_name} className="ins_classcard p-4">  
+        <Card key={item.id} className="ins_classcard p-4">  
             <CardText className="mr-2 ml-2"><i>{item.class_name}</i></CardText>  
             <CardSubtitle className="mr-2 ml-2"><b>User: </b>{item.client_name}</CardSubtitle>
         </Card>)

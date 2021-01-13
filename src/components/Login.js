@@ -37,9 +37,9 @@ export default function Login({ setLoginInfo }) {
       ...loginData,
       [e.target.name]: e.target.value
     };
-    console.log('After validate loginData=', loginData);
+   
     validateChange(e); // for each change in input, do inline validation
-    console.log('After validate err State=', errors)
+    // console.log('After validate err State=', errors)
     setLoginData(newLoginData); // update state with new data
   }
 
@@ -53,12 +53,12 @@ export default function Login({ setLoginInfo }) {
       .validate(e.target.value)
       .then((valid) => {
         // the reset of that input's error
-        console.log("valid here", e.target.name);
+        // console.log("valid here", e.target.name);
         setErrors({ ...errors, [e.target.name]: "" });
       })
       .catch((err) => {
         // the input is breaking form schema
-        console.log("err here", err);
+        // console.log("err here", err);
         setErrors({ ...errors, [e.target.name]: err.errors[0] });
       });
   }
@@ -67,7 +67,7 @@ export default function Login({ setLoginInfo }) {
   // if valid, then change button to be enabled.
   useEffect(() => {
     formSchema.isValid(loginData).then((valid) => {
-      console.log("is my form valid?", valid);
+      // console.log("is my form valid?", valid);
 
       // valid is a boolean 
       setButtonIsDisabled(!valid);
@@ -119,7 +119,7 @@ export default function Login({ setLoginInfo }) {
         }
       })
       .catch(err => {
-        console.log('error in loginData call', err);
+        // console.log('error in loginData call', err);
         setLoading(false);
         setError("Invalid Login name or Password");
         console.log('Login Failed for the User:', loginData.username);

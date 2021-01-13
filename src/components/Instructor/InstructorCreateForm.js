@@ -64,7 +64,7 @@ function InstructorCreate(){
             [e.target.name]:e.target.value
           };
           validateChange(e); // for each change in input, do inline validation
-          console.log('After validate err State=', errors)
+          // console.log('After validate err State=', errors)
           setClassInfo(newClassInfo); // update state with new data
     }
 
@@ -74,7 +74,7 @@ function InstructorCreate(){
     .validate(e.target.value)
     .then((valid) => {
       // the input is passing ! & reset of that input's error
-      console.log("valid here", e.target.name);
+      // console.log("valid here", e.target.name);
       setErrors({ ...errors, [e.target.name]: "" });
     })
     .catch((err) => {
@@ -88,7 +88,7 @@ function InstructorCreate(){
   // if valid, then change button to be enabled.
   useEffect(() => {
     formSchema.isValid(classInfo).then((valid) => {
-      console.log("is my form valid?", valid);
+      // console.log("is my form valid?", valid);
       // valid is a boolean 
       setButtonIsDisabled(!valid);
     });
@@ -121,11 +121,11 @@ function InstructorCreate(){
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    console.log('on submit=',classInfo)
+    // console.log('on submit=',classInfo)
     axiosWithAuth()  
           .post(`/api/users/${params.userid}/class`,classInfo)
           .then((res)=>{
-            console.log('Response back from reqres:',res.data)
+            // console.log('Response back from reqres:',res.data)
             handleShow();
             // setClassList([...classList,res.data])
             //clear server error

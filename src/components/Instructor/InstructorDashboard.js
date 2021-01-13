@@ -14,14 +14,14 @@ function InstructorDashboard({classList,setClassList}){
     const history=useHistory();
     const params=useParams();
     const [userName,setUserName]=useState('')
-    console.log('id in ins dashboard=',params.userid,)
+    // console.log('id in ins dashboard=',params.userid,)
   
     //get the username for the instructor user#id
   useEffect(()=>{
       axiosWithAuth()
       .get(`/api/users/${params.userid}`)
       .then(res=>{
-          console.log('res in get user',res)
+        //   console.log('res in get user',res)
           setUserName(res.data.username)
       })
       .catch(err=>{
@@ -36,7 +36,7 @@ useEffect(()=>{
     axiosWithAuth()
     .get(`/api/users/${params.userid}/class`)
     .then(res=>{
-        console.log('res in get class:',res)
+        // console.log('res in get class:',res)
         setPageLoading(false);
         if (res.data.length !== 0){
             const newList = res.data;

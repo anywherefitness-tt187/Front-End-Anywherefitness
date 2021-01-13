@@ -33,9 +33,9 @@ function Register({ setLoginInfo }) {
       ...userInfo,
       [e.target.name]: e.target.value
     };
-    console.log('After validate userInfo=', userInfo);
+    
     validateChange(e); // for each change in input, do inline validation
-    console.log('After validate err State=', errors)
+    // console.log('After validate err State=', errors)
     setUserInfo(newUserInfo); // update state with new data
   }
 
@@ -47,12 +47,12 @@ function Register({ setLoginInfo }) {
       .then((valid) => {
         // the input is passing!
         // the reset of that input's error
-        console.log("valid here", e.target.name);
+        // console.log("valid here", e.target.name);
         setErrors({ ...errors, [e.target.name]: "" });
       })
       .catch((err) => {
         // the input is breaking form schema
-        console.log("err here", err);
+        // console.log("err here", err);
         setErrors({ ...errors, [e.target.name]: err.errors[0] });
       });
   }
@@ -61,7 +61,7 @@ function Register({ setLoginInfo }) {
   // if valid, then change button to be enabled.
   useEffect(() => {
     formSchema.isValid(userInfo).then((valid) => {
-      console.log("is my form valid?", valid);
+      // console.log("is my form valid?", valid);
 
       // valid is a boolean 
       setButtonIsDisabled(!valid);
@@ -84,7 +84,7 @@ function Register({ setLoginInfo }) {
   });
 
   const handleSubmit = (e) => {
-    console.log('userInfo in submit', userInfo)
+   
     e.preventDefault();
     callPost();
   }

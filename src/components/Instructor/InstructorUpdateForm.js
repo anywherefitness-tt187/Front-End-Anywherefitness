@@ -9,8 +9,8 @@ function InstructorUpdateForm(){
     const [updated,setUpdated]=useState(false);
     const history=useHistory();
     const params = useParams(); 
-    console.log('params.userid in updateform=',params.userid)
-    console.log('params.classid in updateform=',params.classid)
+    // console.log('params.userid in updateform=',params.userid)
+    // console.log('params.classid in updateform=',params.classid)
        //setup Modal
        const [show, setShow] = useState(false);
 
@@ -36,7 +36,7 @@ function InstructorUpdateForm(){
   axiosWithAuth()
   .get(`/api/users/${params.userid}/class`)
   .then(res=>{
-      console.log('res in get class:',res)
+      // console.log('res in get class:',res)
       if (res.data.length !== 0){
           const updateClass=res.data.find(item=>item.id === Number(params.classid));
           setClassInfo(updateClass)
@@ -73,7 +73,7 @@ function InstructorUpdateForm(){
             [e.target.name]:e.target.value
           };
           validateChange(e); // for each change in input, do inline validation
-          console.log('After validate err State=', errors)
+          // console.log('After validate err State=', errors)
           setClassInfo(newClassInfo); // update state with new data
     }
 
@@ -83,12 +83,12 @@ function InstructorUpdateForm(){
     .validate(e.target.value)
     .then((valid) => {
       // the input is passing ! & reset of that input's error
-      console.log("valid here", e.target.name);
+      // console.log("valid here", e.target.name);
       setErrors({ ...errors, [e.target.name]: "" });
     })
     .catch((err) => {
       // the input is breaking form schema
-      console.log("err here", err);
+      // console.log("err here", err);
       setErrors({ ...errors, [e.target.name]: err.errors[0] });
     });
  }
@@ -97,7 +97,7 @@ function InstructorUpdateForm(){
   // if valid, then change button to be enabled.
   useEffect(() => {
     formSchema.isValid(classInfo).then((valid) => {
-      console.log("is my form valid?", valid);
+      // console.log("is my form valid?", valid);
       // valid is a boolean 
       setButtonIsDisabled(!valid);
     });
@@ -130,7 +130,7 @@ function InstructorUpdateForm(){
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    console.log('on submit=',classInfo)
+    // console.log('on submit=',classInfo)
     const updatedClassInfo= {
         class_name:classInfo.class_name,
         class_intensity: classInfo.class_intensity,
@@ -141,11 +141,11 @@ function InstructorUpdateForm(){
         start_time: classInfo.start_time,
         }; 
 
-      console.log('updated class=',updatedClassInfo)
+      // console.log('updated class=',updatedClassInfo)
     axiosWithAuth() 
           .put(`/api/class/${classInfo.id}`, updatedClassInfo)
           .then((res)=>{
-            console.log('Response back from reqres:',res.data)
+            // console.log('Response back from reqres:',res.data)
             setUpdated(true);
             // setClassList([...classList,res.data])
             handleShow();

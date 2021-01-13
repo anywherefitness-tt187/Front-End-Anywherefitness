@@ -29,7 +29,7 @@ function InstructorClass({classList,setClassList,item}){
     const handleClose = () =>{
         setShow(false);
         const newList=classList.filter(e=>e.id !== item.id)
-        console.log('newList in delete=',newList);
+        // console.log('newList in delete=',newList);
         setClassList(newList);
     } 
 
@@ -46,7 +46,7 @@ const handleDelete=()=>{
 
 axiosWithAuth().delete(`/api/class/${item.id}`)
 .then(res=>{
-    console.log('res in delete=',res)
+    // console.log('res in delete=',res)
     handleShow();
     // const newList=classList.filter(e=>e.id !== item.id)
     // console.log('newList in delete=',newList);

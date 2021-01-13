@@ -5,7 +5,7 @@ import InstructorCreateForm from './InstructorCreateForm';
 import InstructorUpdateForm from './InstructorUpdateForm';
 import EnrolledUsers from './EnrolledUsers';
 import PrivateRoute from '../PrivateRoute';
-import initialClass from './TestData';
+// import initialClass from './TestData';
 
 export default function InstructorHome() {
    
@@ -13,7 +13,7 @@ export default function InstructorHome() {
 //  const [classList,setClassList]=useState(initialClass);
 const [classList,setClassList]=useState([]);
 //  const [classDelete,setClassDelete]=useState(false);
- console.log('classList=',classList);
+//  console.log('classList=',classList);
 
   return (
       <div className="ins_home">
