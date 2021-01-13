@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchClasses, scheduleClass, unscheduleClass } from "../../actions/index";
+import { fetchClasses, fetchRegisteredClients, scheduleClass, unscheduleClass } from "../../actions/index";
 import ClassCard from './ClassCard';
 
 import "../../App.css";
 
-const ClientHome = props => {
-  const [displayedClasses, setDisplayedClasses] = useState(props.classes);
+const ScheduledClasses = props => {
+  const [scheduledClasses, setScheduledClasses] = useState(props.classes);
   const fetchClasses = props.fetchClasses;
+  const fetchRegisteredClients = props.fetchRegisteredClients;
 
   const divStyle = {
     display: "flex",
@@ -20,22 +21,36 @@ const ClientHome = props => {
 
   useEffect(() => {
     fetchClasses();
-  }, [fetchClasses])
+    fetchRegisteredClients();
+
+  }, [fetchClasses, fetchRegisteredClients]);
+
+  useEffect(() => {
+    var classes = [];
+
+    props.registeredClients.forEach(registeredClient => {
+      const {client_name, class_id} = registeredClient;
+      if (client_name === localStorage.getItem("username")) {
+        var klass = props.classes.find((klass) => { return klass.id === class_id});
+        if (klass) {
+          classes.push({...klass, registeredClient});
+        }
+      }
+    });
+
+    setScheduledClasses(classes);
+  }, [props.registeredClients, props.classes]);
 
   return (
     <div id="client-page">
       <div className="background" >
         <h1>Scheduled Classes</h1>
 
-        {props.scheduledClasses.length !== 0 ? (
           <div className='card' style={divStyle}>
-            {props.scheduledClasses.map((item, index) => (
-              <ClassCard key={index} item={item} index={index} unscheduleClass={props.unscheduleClass} setUnScheduledClass={unscheduleClass} setDisplayedClasses={setDisplayedClasses} />
+            {scheduledClasses.map((scheduledClass, index) => (
+              <ClassCard key={index} klass={scheduledClass} index={index} isScheduled={true}/>
             ))}
           </div>
-        ) : (
-            <h1> </h1>
-          )}
 
       </div>
     </div>
@@ -45,9 +60,7 @@ const ClientHome = props => {
 const mapStateToProps = state => {
   return {
     classes: state.classes,
-    scheduledClasses: state.scheduledClasses
+    registeredClients: state.registeredClients
   };
 };
-export default connect(mapStateToProps, { fetchClasses, scheduleClass, unscheduleClass })(
-  ClientHome
-);
+export default connect(mapStateToProps, { fetchClasses, fetchRegisteredClients, scheduleClass, unscheduleClass })(ScheduledClasses);

@@ -54,12 +54,12 @@ const ClientHome = props => {
         <h1>Client Dashboard</h1>
         <Search handleInputChange={handleInputChange} query={query} />
         <div style={divStyle}>
-          {displayedClasses.map((item, index) => (
+          {displayedClasses.map((klass, index) => (
             <ClassCard 
             key={index} 
-            item={item}
+            klass={klass}
             index={index}
-            setDisplayedClasses={setDisplayedClasses} />
+            />
           ))}
         </div>
       </div>
